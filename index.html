@@ -6,7 +6,25 @@
 </head>
 <body>
   <h1>Fireporter</h1>
-  <p>Fireporter is a Figma plugin that exports selected UI layers as JSON, paired with a Roblox Studio plugin that rebuilds that UI natively inside Roblox — including gradients, shadows, corners, strokes, and text.</p>
+  <p>Fireporter is a Figma-to-Roblox UI import tool. Connecting your Roblox account lets Fireporter's Live Mode automatically build your Figma UI designs directly inside Roblox Studio.</p>
+
+  <p><a id="connectBtn" href="#">Log in with Roblox</a></p>
+
   <p><a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a></p>
+
+  <script>
+    const BACKEND = "https://fireporter-oauth-eta.vercel.app";
+
+    function generateState() {
+      let str = '';
+      for (let i = 0; i < 32; i++) {
+        str += Math.floor(Math.random() * 16).toString(16);
+      }
+      return str;
+    }
+
+    const state = generateState();
+    document.getElementById('connectBtn').href = `${BACKEND}/api/authorize?state=${state}`;
+  </script>
 </body>
 </html>
