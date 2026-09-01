@@ -2,28 +2,386 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Fireporter - Terms of Service</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Terms of Service for Fireporter — Figma to Roblox UI exporter." />
+  <title>Terms of Service · Fireporter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0f0f12;
+      --surface: #18181c;
+      --surface-2: #1e1e24;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-hi: rgba(255, 255, 255, 0.14);
+      --text: #f2f2f5;
+      --muted: #9a9aa3;
+      --dim: #6e6e78;
+      --accent: #ff5c00;
+      --accent-soft: rgba(255, 92, 0, 0.12);
+      --radius: 12px;
+      --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .glow {
+      position: fixed;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      max-width: 720px;
+      height: 420px;
+      background: radial-gradient(ellipse, rgba(255, 92, 0, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+    }
+
+    header.site {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 40px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #ff5c00, #ff8533);
+      display: grid;
+      place-items: center;
+      font-size: 13px;
+      font-weight: 800;
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(255, 92, 0, 0.35);
+    }
+
+    nav.site-nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    nav.site-nav a {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: color 0.15s, border-color 0.15s, background 0.15s;
+    }
+
+    nav.site-nav a:hover {
+      color: var(--text);
+      border-color: var(--border-hi);
+      background: var(--surface);
+    }
+
+    nav.site-nav a.active {
+      color: var(--accent);
+      background: var(--accent-soft);
+      border-color: rgba(255, 92, 0, 0.35);
+    }
+
+    .hero {
+      margin-bottom: 36px;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border: 1px solid rgba(255, 92, 0, 0.25);
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: clamp(28px, 5vw, 36px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    .updated {
+      font-size: 13px;
+      color: var(--dim);
+    }
+
+    .lead {
+      margin-top: 16px;
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 54ch;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px 24px;
+      margin-bottom: 16px;
+    }
+
+    .card h2 {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    .card p, .card li {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .card p + p { margin-top: 10px; }
+
+    .card ul {
+      margin: 10px 0 0 1.15em;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .card strong { color: var(--text); font-weight: 600; }
+
+    .toc {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin-bottom: 24px;
+    }
+
+    .toc-title {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--dim);
+      margin-bottom: 10px;
+    }
+
+    .toc ol {
+      margin: 0;
+      padding-left: 1.2em;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .toc a {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .toc a:hover { color: var(--accent); }
+
+    footer.site {
+      margin-top: 48px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--dim);
+    }
+
+    footer.site a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    footer.site a:hover { color: var(--accent); }
+
+    @media (max-width: 520px) {
+      header.site { flex-direction: column; align-items: flex-start; }
+      .card { padding: 18px 16px; }
+    }
+  </style>
 </head>
 <body>
-  <h1>Terms of Service</h1>
-  <p>Last updated: 7/30/2026</p>
+  <div class="glow" aria-hidden="true"></div>
+  <div class="wrap">
+    <header class="site">
+      <a class="brand" href="https://teleporter998.github.io/fireporter/">
+        <span class="brand-mark">F</span>
+        Fireporter
+      </a>
+      <nav class="site-nav" aria-label="Legal">
+        <a href="privacy.html">Privacy</a>
+        <a class="active" href="terms.html">Terms</a>
+      </nav>
+    </header>
 
-  <h2>Acceptable use</h2>
-  <p>By using Fireporter, you agree not to export, import, or otherwise use the plugin to process any sexual, NSFW, or otherwise inappropriate content.</p>
+    <div class="hero">
+      <span class="badge">Legal</span>
+      <h1>Terms of Service</h1>
+      <p class="updated">Last updated: July 30, 2026</p>
+      <p class="lead">
+        By installing or using Fireporter (Figma plugin, Roblox Studio plugin, or related online
+        features), you agree to these terms.
+      </p>
+    </div>
 
-  <h2>Ownership</h2>
-  <p>Fireporter does not claim ownership over any designs, layers, or content you export or import using the plugin. You are responsible for ensuring you have the necessary rights to any Figma designs or assets you process with Fireporter.</p>
+    <nav class="toc" aria-label="On this page">
+      <div class="toc-title">On this page</div>
+      <ol>
+        <li><a href="#acceptable-use">Acceptable use</a></li>
+        <li><a href="#ownership">Ownership</a></li>
+        <li><a href="#accounts">Accounts &amp; platforms</a></li>
+        <li><a href="#no-warranty">No warranty</a></li>
+        <li><a href="#liability">Limitation of liability</a></li>
+        <li><a href="#changes">Changes</a></li>
+        <li><a href="#termination">Termination</a></li>
+      </ol>
+    </nav>
 
-  <h2>No warranty</h2>
-  <p>Fireporter is provided "as is," without warranty of any kind, express or implied. The developer makes no guarantees regarding the accuracy, reliability, or fitness of the exported/imported UI for any particular purpose.</p>
+    <section class="card" id="acceptable-use">
+      <h2>Acceptable use</h2>
+      <p>You agree not to use Fireporter to export, import, upload, or process content that is:</p>
+      <ul>
+        <li>Sexual, pornographic, or otherwise NSFW</li>
+        <li>Illegal, hateful, harassing, or violent in a way that violates platform rules</li>
+        <li>Intended to bypass Roblox, Figma, or Fireporter safety or moderation systems</li>
+      </ul>
+      <p>
+        You also agree not to abuse Live Mode, asset upload, or related services (for example
+        flooding uploads, circumventing lockouts, or attempting to disrupt the backend).
+      </p>
+    </section>
 
-  <h2>Limitation of liability</h2>
-  <p>The developer of Fireporter is not liable for any damages, data loss, or issues arising from the use or misuse of the plugin, to the fullest extent permitted by law.</p>
+    <section class="card" id="ownership">
+      <h2>Ownership</h2>
+      <p>
+        Fireporter does <strong>not</strong> claim ownership of the designs, layers, images, or
+        other content you export or import. You remain responsible for having the rights to any
+        Figma files, assets, and Roblox content you process with the plugin.
+      </p>
+      <p>
+        The Fireporter software, name, and branding remain the property of the developer.
+      </p>
+    </section>
 
-  <h2>Changes to the plugin</h2>
-  <p>Features and functionality of Fireporter may change over time. This does not necessarily affect the terms outlined here unless explicitly updated.</p>
+    <section class="card" id="accounts">
+      <h2>Accounts &amp; platforms</h2>
+      <p>
+        When you connect a Roblox account or use Roblox asset upload, you must also follow
+        <strong>Roblox’s Terms of Use</strong> and community standards. When you use the Figma
+        plugin, you must follow <strong>Figma’s</strong> applicable terms and policies.
+      </p>
+      <p>
+        Fireporter may refuse or limit features if your use violates these Terms, Roblox rules,
+        or Figma rules.
+      </p>
+    </section>
 
-  <h2>Termination</h2>
-  <p>Access to Fireporter (e.g., via the Roblox plugin marketplace) may be restricted or revoked in cases of abuse, violation of these terms, or violation of platform policies (Figma or Roblox).</p>
+    <section class="card" id="no-warranty">
+      <h2>No warranty</h2>
+      <p>
+        Fireporter is provided <strong>“as is”</strong> and <strong>“as available”</strong>,
+        without warranty of any kind, express or implied — including merchantability, fitness for
+        a particular purpose, and non-infringement.
+      </p>
+      <p>
+        We do not guarantee that exports will be pixel-perfect on every device, that Live Mode
+        will always be available, or that Roblox will accept every uploaded image.
+      </p>
+    </section>
+
+    <section class="card" id="liability">
+      <h2>Limitation of liability</h2>
+      <p>
+        To the fullest extent permitted by law, the developer of Fireporter is not liable for any
+        indirect, incidental, special, consequential, or punitive damages, or for any loss of
+        data, profits, or business, arising from your use of (or inability to use) the plugin.
+      </p>
+      <p>
+        You use Fireporter at your own risk, including risk related to moderation outcomes and
+        third-party platform decisions.
+      </p>
+    </section>
+
+    <section class="card" id="changes">
+      <h2>Changes</h2>
+      <p>
+        Features of Fireporter may change over time (including Live Mode, upload behavior, and UI).
+        We may update these Terms when needed. Continued use after an update means you accept the
+        revised Terms. The “Last updated” date at the top will change when we revise this page.
+      </p>
+    </section>
+
+    <section class="card" id="termination">
+      <h2>Termination</h2>
+      <p>
+        Access to Fireporter may be restricted or revoked in cases of abuse, violation of these
+        Terms, or violation of Figma or Roblox policies — including temporary lockouts after
+        moderation failures where applicable.
+      </p>
+      <p>
+        You may stop using Fireporter at any time by uninstalling the plugins and logging out of
+        optional Roblox sessions.
+      </p>
+    </section>
+
+    <footer class="site">
+      <span>© 2026 Fireporter</span>
+      <span>
+        <a href="privacy.html">Privacy Policy</a>
+        ·
+        <a href="terms.html">Terms of Service</a>
+      </span>
+    </footer>
+  </div>
 </body>
 </html>
