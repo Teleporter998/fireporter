@@ -2,31 +2,428 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Fireporter - Privacy Policy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Privacy Policy for Fireporter — Figma to Roblox UI exporter." />
+  <title>Privacy Policy · Fireporter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0f0f12;
+      --surface: #18181c;
+      --surface-2: #1e1e24;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-hi: rgba(255, 255, 255, 0.14);
+      --text: #f2f2f5;
+      --muted: #9a9aa3;
+      --dim: #6e6e78;
+      --accent: #ff5c00;
+      --accent-soft: rgba(255, 92, 0, 0.12);
+      --radius: 12px;
+      --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .glow {
+      position: fixed;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      max-width: 720px;
+      height: 420px;
+      background: radial-gradient(ellipse, rgba(255, 92, 0, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+    }
+
+    header.site {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 40px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #ff5c00, #ff8533);
+      display: grid;
+      place-items: center;
+      font-size: 13px;
+      font-weight: 800;
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(255, 92, 0, 0.35);
+    }
+
+    nav.site-nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    nav.site-nav a {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: color 0.15s, border-color 0.15s, background 0.15s;
+    }
+
+    nav.site-nav a:hover {
+      color: var(--text);
+      border-color: var(--border-hi);
+      background: var(--surface);
+    }
+
+    nav.site-nav a.active {
+      color: var(--accent);
+      background: var(--accent-soft);
+      border-color: rgba(255, 92, 0, 0.35);
+    }
+
+    .hero {
+      margin-bottom: 36px;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border: 1px solid rgba(255, 92, 0, 0.25);
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: clamp(28px, 5vw, 36px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    .updated {
+      font-size: 13px;
+      color: var(--dim);
+    }
+
+    .lead {
+      margin-top: 16px;
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 54ch;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px 24px;
+      margin-bottom: 16px;
+    }
+
+    .card h2 {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    .card p, .card li {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .card p + p { margin-top: 10px; }
+
+    .card ul {
+      margin: 10px 0 0 1.15em;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .card strong { color: var(--text); font-weight: 600; }
+
+    .toc {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin-bottom: 24px;
+    }
+
+    .toc-title {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--dim);
+      margin-bottom: 10px;
+    }
+
+    .toc ol {
+      margin: 0;
+      padding-left: 1.2em;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .toc a {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .toc a:hover { color: var(--accent); }
+
+    footer.site {
+      margin-top: 48px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--dim);
+    }
+
+    footer.site a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    footer.site a:hover { color: var(--accent); }
+
+    @media (max-width: 520px) {
+      header.site { flex-direction: column; align-items: flex-start; }
+      .card { padding: 18px 16px; }
+    }
+  </style>
 </head>
 <body>
-  <h1>Privacy Policy</h1>
-  <p>Last updated: 7/30/2026</p>
+  <div class="glow" aria-hidden="true"></div>
+  <div class="wrap">
+    <header class="site">
+      <a class="brand" href="https://teleporter998.github.io/fireporter/">
+        <span class="brand-mark">F</span>
+        Fireporter
+      </a>
+      <nav class="site-nav" aria-label="Legal">
+        <a class="active" href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </nav>
+    </header>
 
-  <p>Fireporter does not collect, store, or transmit any personal data.</p>
+    <div class="hero">
+      <span class="badge">Legal</span>
+      <h1>Privacy Policy</h1>
+      <p class="updated">Last updated: July 30, 2026</p>
+      <p class="lead">
+        This policy explains what Fireporter does with data when you use the Figma plugin,
+        the Roblox Studio plugin, and optional online features such as Live Mode.
+      </p>
+    </div>
 
-  <h2>How Fireporter works</h2>
-  <p>Fireporter consists of two parts:</p>
-  <ul>
-    <li><strong>Figma plugin:</strong> reads the layer(s) you select inside Figma (position, size, fills, effects, text, etc.) and converts that data into a JSON export shown directly in the plugin window for you to copy.</li>
-    <li><strong>Roblox Studio plugin:</strong> takes JSON you paste in and builds matching UI instances inside your currently open Roblox place.</li>
-  </ul>
+    <nav class="toc" aria-label="On this page">
+      <div class="toc-title">On this page</div>
+      <ol>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#how-it-works">How Fireporter works</a></li>
+        <li><a href="#network">Network activity</a></li>
+        <li><a href="#storage">Data storage</a></li>
+        <li><a href="#accounts">Accounts &amp; tokens</a></li>
+        <li><a href="#images">Images &amp; moderation</a></li>
+        <li><a href="#third-party">Third-party services</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ol>
+    </nav>
 
-  <h2>Network activity</h2>
-  <p>Fireporter does not make any network requests. It does not contact Figma's API, Roblox's API, or any third-party server. All processing happens locally within Figma or Roblox Studio, and JSON data is only transferred when you manually copy and paste it yourself.</p>
+    <section class="card" id="overview">
+      <h2>Overview</h2>
+      <p>
+        Fireporter is a tool for converting UI layouts from Figma into Roblox GUI instances.
+        We aim to collect only what is needed for the features you use, and to avoid selling
+        or monetizing your design data.
+      </p>
+      <p>
+        <strong>We do not sell personal data.</strong> We do not use advertising trackers
+        or analytics SDKs inside the plugins.
+      </p>
+    </section>
 
-  <h2>Data storage</h2>
-  <p>Fireporter does not store any data outside of your current Figma or Roblox Studio session. Once you close the plugin or clear the input, no history or record of your export/import is kept by Fireporter.</p>
+    <section class="card" id="how-it-works">
+      <h2>How Fireporter works</h2>
+      <p>Fireporter has two main components:</p>
+      <ul>
+        <li>
+          <strong>Figma plugin</strong> — reads the layer(s) you select in Figma
+          (position, size, fills, effects, text, and related properties) and builds an export
+          (JSON and, when needed, image assets).
+        </li>
+        <li>
+          <strong>Roblox Studio plugin</strong> — builds matching UI instances in your open place
+          from export data (pasted JSON or Live Mode delivery).
+        </li>
+      </ul>
+    </section>
 
-  <h2>Account or API tokens</h2>
-  <p>Fireporter does not require or request access to your Figma account, Figma API tokens, Roblox account, or any credentials.</p>
+    <section class="card" id="network">
+      <h2>Network activity</h2>
+      <p>
+        <strong>Default / paste export</strong> can be used without signing in. In that flow,
+        processing stays on your machine until you copy JSON yourself.
+      </p>
+      <p>
+        <strong>Live Mode and related online features</strong> (when you choose to use them)
+        communicate with Fireporter’s backend and, when you connect a Roblox account,
+        with Roblox’s APIs. Typical purposes include:
+      </p>
+      <ul>
+        <li>Roblox OAuth sign-in and token refresh</li>
+        <li>Delivering an export so Studio can import it</li>
+        <li>Uploading image assets to Roblox on your behalf when Live Mode / Auto Mode requires it</li>
+        <li>Enforcing temporary safety lockouts after certain moderation failures</li>
+      </ul>
+      <p>
+        Design payloads and images you export in these modes are sent only as needed to provide
+        that functionality. They are not used for advertising.
+      </p>
+    </section>
 
-  <h2>Third-party services</h2>
-  <p>Fireporter does not integrate with or share data with any third-party analytics, advertising, or tracking services.</p>
+    <section class="card" id="storage">
+      <h2>Data storage</h2>
+      <ul>
+        <li>
+          <strong>On your device</strong> — the Figma plugin may store small preferences in
+          Figma <em>clientStorage</em> (for example session hints, lockout timers, or optional
+          “My Assets” images you upload for local reuse). That data stays in your Figma client
+          storage quota.
+        </li>
+        <li>
+          <strong>On our backend</strong> — when you use online features, we may temporarily store
+          export payloads, session/token metadata needed for Roblox OAuth, and short-lived
+          lockout records. Export staging data is time-limited and not kept as a permanent archive
+          of your designs.
+        </li>
+        <li>
+          <strong>Roblox</strong> — images uploaded through Live/Auto Mode are subject to Roblox’s
+          own storage, moderation, and policies.
+        </li>
+      </ul>
+    </section>
+
+    <section class="card" id="accounts">
+      <h2>Accounts &amp; tokens</h2>
+      <p>
+        Optional Roblox login uses Roblox OAuth. Access and refresh tokens are stored so Live Mode
+        can act on your behalf (for example uploading assets). You can log out from the plugin;
+        logging out clears the local session association used by Fireporter.
+      </p>
+      <p>
+        Fireporter does not ask for your Figma password. It uses the normal Figma plugin APIs
+        available inside the editor.
+      </p>
+    </section>
+
+    <section class="card" id="images">
+      <h2>Images &amp; moderation</h2>
+      <p>
+        When images are uploaded to Roblox, they are reviewed under Roblox’s rules. If content is
+        rejected or an account is restricted for upload-related reasons, Fireporter may show an
+        error and may apply a temporary lockout so the feature cannot be abused.
+      </p>
+      <p>
+        You are responsible for ensuring that designs and assets you export are appropriate and
+        that you have the rights to use them.
+      </p>
+    </section>
+
+    <section class="card" id="third-party">
+      <h2>Third-party services</h2>
+      <p>
+        Depending on the features you use, Fireporter may rely on:
+      </p>
+      <ul>
+        <li><strong>Figma</strong> — plugin host and client storage</li>
+        <li><strong>Roblox</strong> — OAuth, asset upload, and Studio</li>
+        <li><strong>Hosting providers</strong> — for the Fireporter backend (e.g. deployment and short-lived data stores)</li>
+      </ul>
+      <p>
+        Those providers process data under their own terms and privacy policies when you use the
+        related platforms.
+      </p>
+    </section>
+
+    <section class="card" id="contact">
+      <h2>Contact</h2>
+      <p>
+        Questions about this policy can be raised through the Fireporter Discord community or other
+        support channels listed in the plugin (Socials / Support tabs).
+      </p>
+      <p>
+        We may update this page when the product changes. The “Last updated” date at the top will
+        change when we do.
+      </p>
+    </section>
+
+    <footer class="site">
+      <span>© 2026 Fireporter</span>
+      <span>
+        <a href="terms.html">Terms of Service</a>
+        ·
+        <a href="privacy.html">Privacy Policy</a>
+      </span>
+    </footer>
+  </div>
 </body>
 </html>
