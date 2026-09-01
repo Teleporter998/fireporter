@@ -79,17 +79,13 @@
       letter-spacing: -0.02em;
     }
 
-    .brand-mark {
+    .brand-logo {
       width: 28px;
       height: 28px;
       border-radius: 8px;
-      background: linear-gradient(135deg, #ff5c00, #ff8533);
-      display: grid;
-      place-items: center;
-      font-size: 13px;
-      font-weight: 800;
-      color: #fff;
+      object-fit: cover;
       box-shadow: 0 4px 14px rgba(255, 92, 0, 0.35);
+      background: var(--surface);
     }
 
     nav.site-nav {
@@ -255,7 +251,13 @@
   <div class="wrap">
     <header class="site">
       <a class="brand" href="https://teleporter998.github.io/fireporter/">
-        <span class="brand-mark">F</span>
+                <img
+          class="brand-logo"
+          src="assets/FireporterPluginImage_new.png"
+          width="28"
+          height="28"
+          alt="Fireporter"
+        />
         Fireporter
       </a>
       <nav class="site-nav" aria-label="Legal">
