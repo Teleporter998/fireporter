@@ -5,60 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Privacy Policy for Fireporter — Figma to Roblox UI exporter." />
   <title>Privacy Policy · Fireporter</title>
-    <link rel="icon" href="assets/favicon.ico" sizes="any" />
+  <link rel="icon" href="assets/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" href="assets/favicon.png" />
   <link rel="apple-touch-icon" href="assets/favicon.png" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #0f0f12;
-      --surface: #18181c;
-      --surface-2: #1e1e24;
+      --bg: #121316;
+      --surface: #1a1b1f;
+      --surface-2: #202126;
       --border: rgba(255, 255, 255, 0.08);
-      --border-hi: rgba(255, 255, 255, 0.14);
-      --text: #f2f2f5;
-      --muted: #9a9aa3;
-      --dim: #6e6e78;
-      --accent: #ff5c00;
-      --accent-soft: rgba(255, 92, 0, 0.12);
-      --radius: 12px;
+      --border-hi: rgba(255, 255, 255, 0.16);
+      --text: #eceef1;
+      --muted: #989ba3;
+      --dim: #67696f;
+      --accent: #c2703d;
+      --accent-soft: rgba(194, 112, 61, 0.14);
       --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
 
     body {
       font-family: var(--font);
       background: var(--bg);
       color: var(--text);
-      line-height: 1.65;
+      line-height: 1.6;
       min-height: 100vh;
       -webkit-font-smoothing: antialiased;
     }
 
-    .glow {
-      position: fixed;
-      top: -20%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80%;
-      max-width: 720px;
-      height: 420px;
-      background: radial-gradient(ellipse, rgba(255, 92, 0, 0.12) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
     .wrap {
-      position: relative;
-      z-index: 1;
-      max-width: 720px;
+      max-width: 700px;
       margin: 0 auto;
-      padding: 32px 20px 64px;
+      padding: 40px 24px 72px;
     }
 
     header.site {
@@ -66,9 +49,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      margin-bottom: 40px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid var(--border);
+      margin-bottom: 48px;
     }
 
     .brand {
@@ -77,132 +58,61 @@
       gap: 10px;
       text-decoration: none;
       color: var(--text);
-      font-weight: 700;
+      font-weight: 600;
       font-size: 15px;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.01em;
     }
 
     .brand-logo {
-      width: 28px;
-      height: 28px;
-      border-radius: 8px;
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
       object-fit: cover;
-      box-shadow: 0 4px 14px rgba(255, 92, 0, 0.35);
       background: var(--surface);
     }
 
-    nav.site-nav {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
+    nav.site-nav { display: flex; gap: 20px; }
 
     nav.site-nav a {
-      font-size: 12px;
-      font-weight: 500;
+      font-size: 13px;
       color: var(--muted);
       text-decoration: none;
-      padding: 6px 12px;
-      border-radius: 999px;
-      border: 1px solid transparent;
-      transition: color 0.15s, border-color 0.15s, background 0.15s;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 2px;
     }
 
-    nav.site-nav a:hover {
-      color: var(--text);
-      border-color: var(--border-hi);
-      background: var(--surface);
-    }
+    nav.site-nav a:hover { color: var(--text); border-color: var(--border-hi); }
+    nav.site-nav a.active { color: var(--accent); border-color: var(--accent); }
 
-    nav.site-nav a.active {
-      color: var(--accent);
-      background: var(--accent-soft);
-      border-color: rgba(255, 92, 0, 0.35);
-    }
-
-    .hero {
-      margin-bottom: 36px;
-    }
-
-    .badge {
-      display: inline-block;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--accent);
-      background: var(--accent-soft);
-      border: 1px solid rgba(255, 92, 0, 0.25);
-      padding: 4px 10px;
-      border-radius: 999px;
-      margin-bottom: 14px;
-    }
+    .hero { margin-bottom: 40px; max-width: 54ch; }
 
     h1 {
-      font-size: clamp(28px, 5vw, 36px);
+      font-size: clamp(26px, 4.5vw, 32px);
       font-weight: 700;
-      letter-spacing: -0.03em;
-      line-height: 1.2;
-      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin-bottom: 8px;
     }
 
-    .updated {
-      font-size: 13px;
-      color: var(--dim);
-    }
+    .updated { font-size: 13px; color: var(--dim); }
 
     .lead {
-      margin-top: 16px;
+      margin-top: 14px;
       font-size: 15px;
       color: var(--muted);
-      max-width: 54ch;
     }
-
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 22px 24px;
-      margin-bottom: 16px;
-    }
-
-    .card h2 {
-      font-size: 16px;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      margin-bottom: 10px;
-      color: var(--text);
-    }
-
-    .card p, .card li {
-      font-size: 14px;
-      color: var(--muted);
-    }
-
-    .card p + p { margin-top: 10px; }
-
-    .card ul {
-      margin: 10px 0 0 1.15em;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .card strong { color: var(--text); font-weight: 600; }
 
     .toc {
-      background: var(--surface-2);
+      background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 16px 20px;
-      margin-bottom: 24px;
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin-bottom: 32px;
     }
 
     .toc-title {
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
       color: var(--dim);
       margin-bottom: 10px;
     }
@@ -215,13 +125,39 @@
       gap: 6px;
     }
 
-    .toc a {
-      font-size: 13px;
-      color: var(--muted);
-      text-decoration: none;
+    .toc a { font-size: 13px; color: var(--muted); text-decoration: none; }
+    .toc a:hover { color: var(--accent); }
+
+    section.entry {
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
     }
 
-    .toc a:hover { color: var(--accent); }
+    section.entry:first-of-type { border-top: 1px solid var(--border); }
+
+    section.entry h2 {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    section.entry p, section.entry li {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    section.entry p + p { margin-top: 10px; }
+
+    section.entry ul {
+      margin: 10px 0 0 1.15em;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    section.entry strong { color: var(--text); font-weight: 600; }
 
     footer.site {
       margin-top: 48px;
@@ -236,31 +172,19 @@
       color: var(--dim);
     }
 
-    footer.site a {
-      color: var(--muted);
-      text-decoration: none;
-    }
-
+    footer.site a { color: var(--muted); text-decoration: none; }
     footer.site a:hover { color: var(--accent); }
 
-    @media (max-width: 520px) {
-      header.site { flex-direction: column; align-items: flex-start; }
-      .card { padding: 18px 16px; }
+    @media (max-width: 480px) {
+      header.site { flex-direction: column; align-items: flex-start; gap: 12px; }
     }
   </style>
 </head>
 <body>
-  <div class="glow" aria-hidden="true"></div>
   <div class="wrap">
     <header class="site">
-      <a class="brand" href="https://teleporter998.github.io/fireporter/">
-                <img
-          class="brand-logo"
-          src="assets/FireporterPluginImage_new.png"
-          width="28"
-          height="28"
-          alt="Fireporter"
-        />
+      <a class="brand" href="index.html">
+        <img class="brand-logo" src="assets/FireporterPluginImage_new.png" width="26" height="26" alt="Fireporter" />
         Fireporter
       </a>
       <nav class="site-nav" aria-label="Legal">
@@ -270,7 +194,6 @@
     </header>
 
     <div class="hero">
-      <span class="badge">Legal</span>
       <h1>Privacy Policy</h1>
       <p class="updated">Last updated: September 1, 2026</p>
       <p class="lead">
@@ -293,7 +216,7 @@
       </ol>
     </nav>
 
-    <section class="card" id="overview">
+    <section class="entry" id="overview">
       <h2>Overview</h2>
       <p>
         Fireporter is a tool for converting UI layouts from Figma into Roblox GUI instances.
@@ -306,7 +229,7 @@
       </p>
     </section>
 
-    <section class="card" id="how-it-works">
+    <section class="entry" id="how-it-works">
       <h2>How Fireporter works</h2>
       <p>Fireporter has two main components:</p>
       <ul>
@@ -322,7 +245,7 @@
       </ul>
     </section>
 
-    <section class="card" id="network">
+    <section class="entry" id="network">
       <h2>Network activity</h2>
       <p>
         <strong>Default / paste export</strong> can be used without signing in. In that flow,
@@ -330,8 +253,8 @@
       </p>
       <p>
         <strong>Live Mode and related online features</strong> (when you choose to use them)
-        communicate with Fireporter’s backend and, when you connect a Roblox account,
-        with Roblox’s APIs. Typical purposes include:
+        communicate with Fireporter's backend and, when you connect a Roblox account,
+        with Roblox's APIs. Typical purposes include:
       </p>
       <ul>
         <li>Roblox OAuth sign-in and token refresh</li>
@@ -345,13 +268,13 @@
       </p>
     </section>
 
-    <section class="card" id="storage">
+    <section class="entry" id="storage">
       <h2>Data storage</h2>
       <ul>
         <li>
           <strong>On your device</strong> — the Figma plugin may store small preferences in
           Figma <em>clientStorage</em> (for example session hints, lockout timers, or optional
-          “My Assets” images you upload for local reuse). That data stays in your Figma client
+          "My Assets" images you upload for local reuse). That data stays in your Figma client
           storage quota.
         </li>
         <li>
@@ -361,13 +284,13 @@
           of your designs.
         </li>
         <li>
-          <strong>Roblox</strong> — images uploaded through Live/Auto Mode are subject to Roblox’s
+          <strong>Roblox</strong> — images uploaded through Live/Auto Mode are subject to Roblox's
           own storage, moderation, and policies.
         </li>
       </ul>
     </section>
 
-    <section class="card" id="accounts">
+    <section class="entry" id="accounts">
       <h2>Accounts &amp; tokens</h2>
       <p>
         Optional Roblox login uses Roblox OAuth. Access and refresh tokens are stored so Live Mode
@@ -380,10 +303,10 @@
       </p>
     </section>
 
-    <section class="card" id="images">
+    <section class="entry" id="images">
       <h2>Images &amp; moderation</h2>
       <p>
-        When images are uploaded to Roblox, they are reviewed under Roblox’s rules. If content is
+        When images are uploaded to Roblox, they are reviewed under Roblox's rules. If content is
         rejected or an account is restricted for upload-related reasons, Fireporter may show an
         error and may apply a temporary lockout so the feature cannot be abused.
       </p>
@@ -393,11 +316,9 @@
       </p>
     </section>
 
-    <section class="card" id="third-party">
+    <section class="entry" id="third-party">
       <h2>Third-party services</h2>
-      <p>
-        Depending on the features you use, Fireporter may rely on:
-      </p>
+      <p>Depending on the features you use, Fireporter may rely on:</p>
       <ul>
         <li><strong>Figma</strong> — plugin host and client storage</li>
         <li><strong>Roblox</strong> — OAuth, asset upload, and Studio</li>
@@ -409,25 +330,21 @@
       </p>
     </section>
 
-    <section class="card" id="contact">
+    <section class="entry" id="contact">
       <h2>Contact</h2>
       <p>
         Questions about this policy can be raised through the Fireporter Discord community or other
         support channels listed in the plugin (Socials / Support tabs).
       </p>
       <p>
-        We may update this page when the product changes. The “Last updated” date at the top will
+        We may update this page when the product changes. The "Last updated" date at the top will
         change when we do.
       </p>
     </section>
 
     <footer class="site">
       <span>© 2026 Fireporter</span>
-      <span>
-        <a href="terms.html">Terms of Service</a>
-        ·
-        <a href="privacy.html">Privacy Policy</a>
-      </span>
+      <span><a href="terms.html">Terms of Service</a> · <a href="privacy.html">Privacy Policy</a></span>
     </footer>
   </div>
 </body>
