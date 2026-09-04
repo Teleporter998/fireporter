@@ -115,7 +115,17 @@
       flex-wrap: wrap;
       gap: 12px;
       align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .plugin-links {
+      display: flex;
+      gap: 12px;
       margin-bottom: 10px;
+    }
+
+    .plugin-links .btn {
+      flex: 1 1 0;
     }
 
     .btn {
@@ -193,6 +203,7 @@
 
     @media (max-width: 480px) {
       header.site { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .plugin-links { flex-direction: column; }
     }
   </style>
 </head>
@@ -219,9 +230,11 @@
       </p>
       <div class="actions">
         <a id="connectBtn" class="btn btn-primary" href="#">Connect Roblox account</a>
+        <a class="btn btn-secondary" href="privacy.html">Read the privacy policy</a>
+      </div>
+      <div class="plugin-links">
         <a class="btn btn-secondary" href="https://create.roblox.com/store/asset/85390849505858/Fireporter" target="_blank" rel="noopener">Roblox Plugin</a>
         <a class="btn btn-secondary" href="https://www.figma.com/community/plugin/1525922126871670955/fireporter" target="_blank" rel="noopener">Figma Plugin</a>
-        <a class="btn btn-secondary" href="privacy.html">Read the privacy policy</a>
       </div>
       <p class="hint">OAuth is only used for Live Mode — delivering exports and uploading images.</p>
     </section>
