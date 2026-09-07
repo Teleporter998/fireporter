@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="How to use Fireporter — step-by-step guide to the Figma and Roblox Studio plugins." />
+  <title>Guide · Fireporter</title>
+  <link rel="icon" href="assets/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #121316;
+      --surface: #1a1b1f;
+      --surface-2: #202126;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-hi: rgba(255, 255, 255, 0.16);
+      --text: #eceef1;
+      --muted: #989ba3;
+      --dim: #67696f;
+      --accent: #c2703d;
+      --accent-hover: #d38249;
+      --accent-soft: rgba(194, 112, 61, 0.14);
+      --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 40px 24px 72px;
+    }
+    header.site {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: -0.01em;
+    }
+    .brand-logo {
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      object-fit: cover;
+      background: var(--surface);
+    }
+    nav.site-nav { display: flex; gap: 20px; flex-wrap: wrap; }
+    nav.site-nav a {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 2px;
+    }
+    nav.site-nav a:hover { color: var(--text); border-color: var(--border-hi); }
+    nav.site-nav a.active { color: var(--accent); border-color: var(--accent); }
+
+    .hero { margin-bottom: 36px; max-width: 54ch; }
+    h1 {
+      font-size: clamp(26px, 4.5vw, 32px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin-bottom: 12px;
+    }
+    .lead { font-size: 15px; color: var(--muted); }
+
+    .toc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin-bottom: 32px;
+    }
+    .toc-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--dim);
+      margin-bottom: 10px;
+    }
+    .toc ol {
+      margin: 0;
+      padding-left: 1.2em;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .toc a { font-size: 13px; color: var(--muted); text-decoration: none; }
+    .toc a:hover { color: var(--accent); }
+
+    .level {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+    .level-basics {
+      color: var(--accent);
+      background: var(--accent-soft);
+      border: 1px solid rgba(194, 112, 61, 0.28);
+    }
+    .level-intermediate {
+      color: #c4a35a;
+      background: rgba(196, 163, 90, 0.12);
+      border: 1px solid rgba(196, 163, 90, 0.28);
+    }
+    .level-advanced {
+      color: #8ab4ff;
+      background: rgba(120, 160, 255, 0.12);
+      border: 1px solid rgba(120, 160, 255, 0.28);
+    }
+    .level-beta {
+      color: #c9a0ff;
+      background: rgba(180, 140, 255, 0.12);
+      border: 1px solid rgba(180, 140, 255, 0.28);
+    }
+
+    section.entry {
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    section.entry:first-of-type { border-top: 1px solid var(--border); }
+    section.entry h2 {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+    }
+    section.entry h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin: 18px 0 6px;
+      letter-spacing: -0.01em;
+    }
+    section.entry p, section.entry li {
+      font-size: 14px;
+      color: var(--muted);
+    }
+    section.entry p + p { margin-top: 10px; }
+    section.entry ul, section.entry ol {
+      margin: 10px 0 0 1.15em;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    section.entry strong { color: var(--text); font-weight: 600; }
+    section.entry code {
+      font-family: ui-monospace, "JetBrains Mono", monospace;
+      font-size: 12.5px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 5px;
+      color: var(--text);
+    }
+
+    .step-list {
+      margin: 14px 0 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .step-list li {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 12px;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .step-list li:last-child { border-bottom: none; }
+    .step-list .n {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--dim);
+      padding-top: 2px;
+    }
+    .step-list strong { color: var(--text); display: block; margin-bottom: 2px; }
+
+    .tag-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 13px;
+    }
+    .tag-table th, .tag-table td {
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .tag-table th {
+      color: var(--dim);
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .tag-table td { color: var(--muted); }
+    .tag-table code { white-space: nowrap; }
+
+    .note {
+      margin-top: 14px;
+      padding: 12px 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .note strong { color: var(--text); }
+
+    footer.site {
+      margin-top: 48px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--dim);
+    }
+    footer.site a { color: var(--muted); text-decoration: none; }
+    footer.site a:hover { color: var(--accent); }
+
+    @media (max-width: 480px) {
+      header.site { flex-direction: column; align-items: flex-start; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="site">
+      <a class="brand" href="index.html">
+        <img class="brand-logo" src="assets/FireporterPluginImage_new.png" width="26" height="26" alt="Fireporter" />
+        Fireporter
+      </a>
+      <nav class="site-nav" aria-label="Site">
+        <a class="active" href="guide.html">Guide</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </nav>
+    </header>
+
+    <div class="hero">
+      <h1>How to use Fireporter</h1>
+      <p class="lead">
+        A step-by-step guide to the Figma plugin and the Roblox Studio plugin —
+        from your first export to Live Mode, tags, and advanced options.
+      </p>
+    </div>
+
+    <nav class="toc" aria-label="On this page">
+      <div class="toc-title">On this page</div>
+      <ol>
+        <li><a href="#install">Install both plugins</a></li>
+        <li><a href="#basics">Basics — first export</a></li>
+        <li><a href="#live">Basics — Live Mode</a></li>
+        <li><a href="#tags">Intermediate — tags</a></li>
+        <li><a href="#toggles">Intermediate — export toggles</a></li>
+        <li><a href="#auto">Advanced — Auto Mode</a></li>
+        <li><a href="#filter">Advanced — Filter &amp; text tools</a></li>
+        <li><a href="#assets">Advanced — My Assets</a></li>
+        <li><a href="#tips">Tips &amp; troubleshooting</a></li>
+      </ol>
+    </nav>
+
+    <!-- INSTALL -->
+    <section class="entry" id="install">
+      <span class="level level-basics">Basics</span>
+      <h2>Install both plugins</h2>
+      <p>You need both sides for a full workflow:</p>
+      <ul>
+        <li>
+          <strong>Figma</strong> —
+          <a href="https://www.figma.com/community/plugin/1525922126871670955/fireporter" style="color: var(--accent);">Fireporter on Figma Community</a>
+        </li>
+        <li>
+          <strong>Roblox Studio</strong> —
+          <a href="https://create.roblox.com/store/asset/85390849505858/Fireporter" style="color: var(--accent);">Fireporter on the Creator Store</a>
+        </li>
+      </ul>
+      <p>
+        In Studio, open the plugin panel and leave a <strong>ScreenGui</strong> selected when you import
+        (Live Mode places UI under the selected ScreenGui).
+      </p>
+    </section>
+
+    <!-- BASICS EXPORT -->
+    <section class="entry" id="basics">
+      <span class="level level-basics">Basics</span>
+      <h2>Your first export (copy &amp; paste)</h2>
+      <p>This path works offline — no Roblox login required.</p>
+      <ol class="step-list">
+        <li>
+          <span class="n">01</span>
+          <div>
+            <strong>Select layers in Figma</strong>
+            Pick a frame or group that represents your UI. You can select multiple top-level items.
+          </div>
+        </li>
+        <li>
+          <span class="n">02</span>
+          <div>
+            <strong>Open Fireporter in Figma</strong>
+            Run the plugin. On the <strong>Export</strong> tab, leave Live Mode off for a normal export.
+          </div>
+        </li>
+        <li>
+          <span class="n">03</span>
+          <div>
+            <strong>Export</strong>
+            Use the export action. Fireporter builds JSON from your selection and shows it in the code panel.
+          </div>
+        </li>
+        <li>
+          <span class="n">04</span>
+          <div>
+            <strong>Copy the output</strong>
+            Copy the generated code from the plugin window.
+          </div>
+        </li>
+        <li>
+          <span class="n">05</span>
+          <div>
+            <strong>Paste in Studio</strong>
+            Open the Fireporter Studio plugin, select a ScreenGui, paste the JSON, and import.
+          </div>
+        </li>
+      </ol>
+      <div class="note">
+        <strong>Tip:</strong> Turn on <strong>Auto Scale</strong> so sizes and positions use scale values
+        that adapt better across devices.
+      </div>
+    </section>
+
+    <!-- LIVE MODE -->
+    <section class="entry" id="live">
+      <span class="level level-basics">Basics</span>
+      <h2>Live Mode</h2>
+      <p>
+        Live Mode sends the export to your signed-in Roblox account and the Studio plugin
+        pulls it in automatically — no copy/paste. Images can be uploaded to Roblox for you.
+      </p>
+      <ol class="step-list">
+        <li>
+          <span class="n">01</span>
+          <div>
+            <strong>Connect Roblox</strong>
+            In the Figma plugin, open <strong>Account</strong> (or the login prompt) and log in with Roblox.
+            You can also use <a href="index.html" style="color: var(--accent);">Connect Roblox account</a> on this site.
+          </div>
+        </li>
+        <li>
+          <span class="n">02</span>
+          <div>
+            <strong>Open Studio Fireporter</strong>
+            Enable the dock widget and select a <strong>ScreenGui</strong>. Live polling runs while the panel is open.
+          </div>
+        </li>
+        <li>
+          <span class="n">03</span>
+          <div>
+            <strong>Enable Live Mode in Figma</strong>
+            Turn on the <strong>Live Mode</strong> toggle, select your UI, and export.
+          </div>
+        </li>
+        <li>
+          <span class="n">04</span>
+          <div>
+            <strong>Wait for import</strong>
+            Studio should receive the tree within a few seconds and build the instances under your ScreenGui.
+          </div>
+        </li>
+      </ol>
+      <div class="note">
+        <strong>Note:</strong> Image uploads follow Roblox moderation. If an image is rejected, Fireporter may
+        show an error and a temporary lockout may apply.
+      </div>
+    </section>
+
+    <!-- TAGS -->
+    <section class="entry" id="tags">
+      <span class="level level-intermediate">Intermediate</span>
+      <h2>Tags</h2>
+      <p>
+        Put tags at the <strong>end of the layer name</strong> in Figma (for example
+        <code>PlayButton_button</code>). The <strong>Tags</strong> tab in the plugin lists them and can apply tags to the selection.
+      </p>
+      <table class="tag-table">
+        <thead>
+          <tr>
+            <th>Tag</th>
+            <th>Result in Roblox</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>_scroll</code></td>
+            <td>ScrollingFrame (canvas sized from overflowing children)</td>
+          </tr>
+          <tr>
+            <td><code>_button</code></td>
+            <td>ImageButton</td>
+          </tr>
+          <tr>
+            <td><code>_box</code></td>
+            <td>TextBox</td>
+          </tr>
+          <tr>
+            <td><code>_frame</code></td>
+            <td>Frame (with fill, stroke, corners, etc.)</td>
+          </tr>
+          <tr>
+            <td><code>_lock</code></td>
+            <td>UIAspectRatioConstraint</td>
+          </tr>
+          <tr>
+            <td><code>_ignore</code></td>
+            <td>Skipped on export</td>
+          </tr>
+          <tr>
+            <td><code>_text</code></td>
+            <td>TextLabel</td>
+          </tr>
+          <tr>
+            <td><code>_gradient</code></td>
+            <td>UIGradient from fills</td>
+          </tr>
+          <tr>
+            <td><code>_canvas</code></td>
+            <td>CanvasGroup</td>
+          </tr>
+          <tr>
+            <td><code>_grayscale</code></td>
+            <td>Grayscale filter on that object’s export</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- TOGGLES -->
+    <section class="entry" id="toggles">
+      <span class="level level-intermediate">Intermediate</span>
+      <h2>Export toggles</h2>
+      <p>On the Export tab, toggles control what gets included:</p>
+      <h3>Common (Basics+)</h3>
+      <ul>
+        <li><strong>Include Strokes</strong> — export strokes as UIStroke where supported</li>
+        <li><strong>Include Effects</strong> — effects such as shadows when enabled</li>
+        <li><strong>Auto Scale</strong> — convert layout to scale-friendly values</li>
+        <li><strong>Include Gradients</strong> — UIGradient from linear fills</li>
+        <li><strong>Global Text / Text Auto Scale / Text Stroke</strong> — text handling options</li>
+        <li><strong>Auto Text Converter</strong> — custom fonts become image labels when Roblox can’t use the font</li>
+      </ul>
+      <h3>BETA / optional</h3>
+      <ul>
+        <li><strong>Naming Intelligence</strong> — smarter instance names</li>
+        <li><strong>Respect Shadows / Corners</strong> — extra fidelity for shadows and corner radii</li>
+        <li><strong>Design Polish Enhancer</strong> — experimental polish pass</li>
+      </ul>
+    </section>
+
+    <!-- AUTO MODE -->
+    <section class="entry" id="auto">
+      <span class="level level-advanced">Advanced</span>
+      <h2>Auto Mode</h2>
+      <p>
+        Auto Mode (second-row toggle) reduces how often you need tags:
+      </p>
+      <ul>
+        <li>Frames become Frames without needing <code>_frame</code></li>
+        <li>Text becomes TextLabels without needing <code>_text</code></li>
+        <li>Images become ImageLabels and can upload/replace assets like Live Mode when the database allows</li>
+        <li>You still tag <code>_button</code>, <code>_box</code>, and <code>_scroll</code> when you need those types</li>
+        <li>Unknown types fall back to Frame</li>
+      </ul>
+      <div class="note">
+        <strong>Note:</strong> Auto Mode still respects explicit tags. Prefer tags when you need a specific class.
+      </div>
+    </section>
+
+    <!-- FILTER -->
+    <section class="entry" id="filter">
+      <span class="level level-advanced">Advanced</span>
+      <span class="level level-beta" style="margin-left: 6px;">Beta · Live</span>
+      <h2>Filter</h2>
+      <p>
+        The <strong>Filter</strong> toggle (Live-oriented) applies a color filter when exporting images
+        for Live Mode — for example grayscale. Right-click the control to open filter options
+        (include text / frames / image labels / buttons, and color choice).
+      </p>
+      <p>
+        Filtering changes exported PNG pixels in Figma during export; it is not the same as setting
+        <code>ImageColor3</code> in Studio.
+      </p>
+    </section>
+
+    <!-- ASSETS -->
+    <section class="entry" id="assets">
+      <span class="level level-advanced">Advanced</span>
+      <h2>My Assets</h2>
+      <p>
+        The <strong>Assets</strong> tab stores images on <strong>this device only</strong> (Figma clientStorage).
+        Upload files or folders, then select a rectangle/frame in Figma and click an asset to apply it.
+      </p>
+      <ul>
+        <li>Prefer PNG for transparency</li>
+        <li>Very large files may be compressed or skipped if storage is full</li>
+        <li>Assets are not synced across computers</li>
+      </ul>
+    </section>
+
+    <!-- TIPS -->
+    <section class="entry" id="tips">
+      <span class="level level-basics">Basics</span>
+      <h2>Tips &amp; troubleshooting</h2>
+      <ul>
+        <li><strong>Nothing imports in Live Mode</strong> — select a ScreenGui in Studio and keep the Fireporter widget open.</li>
+        <li><strong>Images blank</strong> — Live/Auto upload may have failed; check the plugin notification and Roblox moderation state.</li>
+        <li><strong>Wrong instance type</strong> — add the correct tag at the end of the name, or use Auto Mode for defaults.</li>
+        <li><strong>Scrolling content</strong> — name the container with <code>_scroll</code>; children that overflow set canvas size.</li>
+        <li><strong>Export errors</strong> — review the error list (critical / medium / small) and fix named layers, or continue if safe.</li>
+        <li><strong>Support</strong> — optional tips via Ko-fi are in the plugin Support tab; community links are under Socials.</li>
+      </ul>
+    </section>
+
+    <footer class="site">
+      <span>© 2026 Fireporter</span>
+      <span>
+        <a href="index.html">Home</a> ·
+        <a href="privacy.html">Privacy Policy</a> ·
+        <a href="terms.html">Terms of Service</a>
+      </span>
+    </footer>
+  </div>
+</body>
+</html>
