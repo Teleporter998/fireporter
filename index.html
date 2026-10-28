@@ -226,8 +226,8 @@
       <h1>Bring Figma layouts into Roblox Studio</h1>
       <p class="lead">
         Fireporter reads a Figma selection and rebuilds it as native Roblox GUI instances.
-        Connect a Roblox account to use <strong>Live Mode</strong>, which delivers exports
-        straight into an open Studio place as you work.
+        Connect a Roblox account to use <strong>Upload mode</strong>, which uploads your
+        images to Roblox and links them in the export for you.
       </p>
       <div class="actions">
         <a id="connectBtn" class="btn btn-primary" href="#">Connect Roblox account</a>
@@ -237,7 +237,7 @@
         <a class="btn btn-secondary" href="https://create.roblox.com/store/asset/85390849505858/Fireporter" target="_blank" rel="noopener">Roblox Plugin</a>
         <a class="btn btn-secondary" href="https://www.figma.com/community/plugin/1525922126871670955/fireporter" target="_blank" rel="noopener">Figma Plugin</a>
       </div>
-      <p class="hint">OAuth is only used for Live Mode — delivering exports and uploading images.</p>
+      <p class="hint">Signing in is only needed to upload images, and gives you a connection code to paste into the Figma plugin. Your layout data never leaves the plugin.</p>
     </section>
 
     <section class="steps" aria-label="How it works">
@@ -251,15 +251,15 @@
       <div class="step">
         <span class="step-num">02</span>
         <div>
-          <h3>Export, or turn on Live Mode</h3>
-          <p>Copy the export as JSON, or sign in and send it directly to the Studio plugin.</p>
+          <h3>Export, and upload images if you need them</h3>
+          <p>Copy the export as JSON. Sign in with Roblox and switch to Upload mode to have your images uploaded and their asset IDs filled in for you.</p>
         </div>
       </div>
       <div class="step">
         <span class="step-num">03</span>
         <div>
           <h3>Build in Studio</h3>
-          <p>The Roblox Studio plugin creates matching GUI instances in your open place.</p>
+          <p>Paste the JSON into the Roblox Studio plugin and it creates matching GUI instances inside your selected ScreenGui.</p>
         </div>
       </div>
     </section>
