@@ -197,10 +197,10 @@
 
     <div class="hero">
       <h1>Privacy Policy</h1>
-      <p class="updated">Last updated: September 13, 2026</p>
+      <p class="updated">Last updated: October 28, 2026</p>
       <p class="lead">
         This policy explains what Fireporter does with data when you use the Figma plugin,
-        the Roblox Studio plugin, and optional online features such as Live Mode.
+        the Roblox Studio plugin, and optional online features such as image upload.
       </p>
     </div>
 
@@ -243,7 +243,7 @@
         </li>
         <li>
           <strong>Roblox Studio plugin</strong> — builds matching UI instances in your open place
-          from export data (pasted JSON or Live Mode delivery).
+          from the JSON you paste into it. It does not contact Fireporter's backend.
         </li>
       </ul>
     </section>
@@ -255,19 +255,17 @@
         processing stays on your machine until you copy JSON yourself.
       </p>
       <p>
-        <strong>Live Mode and related online features</strong> (when you choose to use them)
-        communicate with Fireporter's backend and, when you connect a Roblox account,
-        with Roblox's APIs. Typical purposes include:
+        <strong>Upload mode and Auto Mode</strong> (when you are signed in) communicate with
+        Fireporter's backend and with Roblox's APIs. Typical purposes include:
       </p>
       <ul>
         <li>Roblox OAuth sign-in and token refresh</li>
-        <li>Delivering an export so Studio can import it</li>
-        <li>Uploading image assets to Roblox on your behalf when Live Mode / Auto Mode requires it</li>
-        <li>Enforcing temporary safety lockouts after certain moderation failures</li>
+        <li>Sending the images from your selection to Fireporter's backend, which uploads them to Roblox on your behalf and returns the asset IDs</li>
       </ul>
       <p>
-        Design payloads and images you export in these modes are sent only as needed to provide
-        that functionality. They are not used for advertising.
+        Only those images and your connection code are sent. The rest of your design data
+        (layout, text, colors, and structure) stays in the plugin and is never sent to Fireporter's
+        backend. Images are used only to provide the upload and are not used for advertising.
       </p>
     </section>
 
@@ -275,20 +273,20 @@
       <h2>Data storage</h2>
       <ul>
         <li>
-          <strong>On your device</strong> — the Figma plugin may store small preferences in
-          Figma <em>clientStorage</em> (for example session hints, lockout timers, or optional
-          "My Assets" images you upload for local reuse). That data stays in your Figma client
-          storage quota.
+          <strong>On your device</strong> — the Figma plugin stores small items in Figma
+          <em>clientStorage</em>: your Roblox connection code, your username, simple preferences,
+          and any optional "My Assets" images you upload for local reuse. That data stays in your
+          Figma client storage quota.
         </li>
         <li>
-          <strong>On our backend</strong> — when you use online features, we may temporarily store
-          export payloads, session/token metadata needed for Roblox OAuth, and short-lived
-          lockout records. Export staging data is time-limited and not kept as a permanent archive
-          of your designs.
+          <strong>On our backend</strong> — Fireporter's backend has no database. It does not store
+          your designs, images, tokens, or account details. Requests are processed in memory and
+          discarded when they finish. Our hosting provider may keep standard operational logs, such
+          as request times and error messages, under its own policy.
         </li>
         <li>
-          <strong>Roblox</strong> — images uploaded through Live/Auto Mode are subject to Roblox's
-          own storage, moderation, and policies.
+          <strong>Roblox</strong> — images uploaded through Upload or Auto Mode are subject to
+          Roblox's own storage, moderation, and policies.
         </li>
       </ul>
     </section>
@@ -296,9 +294,18 @@
     <section class="entry" id="accounts">
       <h2>Accounts &amp; tokens</h2>
       <p>
-        Optional Roblox login uses Roblox OAuth. Access and refresh tokens are stored so Live Mode
-        can act on your behalf (for example uploading assets). You can log out from the plugin;
-        logging out clears the local session association used by Fireporter.
+        Optional Roblox login uses Roblox OAuth. Fireporter asks for permission to read your basic
+        profile, read and write your assets, and read your inventory items, so that it can upload
+        images to your account. After you approve, the backend bundles your Roblox access and refresh
+        tokens, user ID, and username into a connection code, encrypts it with a key that only the
+        backend holds, and shows it to you on the confirmation page. You paste it into the plugin,
+        which keeps it in Figma clientStorage on your device. The plugin sends it back with each
+        upload so the backend can act on your behalf. Fireporter keeps no copy.
+      </p>
+      <p>
+        Logging out removes the code from the plugin. Because Fireporter keeps no server-side
+        record, you can also revoke its access at any time from your Roblox account settings. Treat
+        the connection code like a password and do not share it.
       </p>
       <p>
         Fireporter does not ask for your Figma password. It uses the normal Figma plugin APIs
@@ -310,8 +317,8 @@
       <h2>Images &amp; moderation</h2>
       <p>
         When images are uploaded to Roblox, they are reviewed under Roblox's rules. If content is
-        rejected or an account is restricted for upload-related reasons, Fireporter may show an
-        error and may apply a temporary lockout so the feature cannot be abused.
+        rejected or an account is restricted for upload-related reasons, Fireporter shows an
+        error for the affected images, and the rest of your export still completes.
       </p>
       <p>
         You are responsible for ensuring that designs and assets you export are appropriate and
@@ -334,7 +341,7 @@
       </ul>
       <p>
         Ticket content is delivered directly by email through our email-delivery provider and is
-        not stored in Fireporter's own database. Attachment size and file type are limited on the
+        not stored by Fireporter's backend. Attachment size and file type are limited on the
         client before anything is sent.
       </p>
     </section>
@@ -345,7 +352,7 @@
       <ul>
         <li><strong>Figma</strong> — plugin host and client storage</li>
         <li><strong>Roblox</strong> — OAuth, asset upload, and Studio</li>
-        <li><strong>Hosting providers</strong> — for the Fireporter backend (e.g. deployment and short-lived data stores)</li>
+        <li><strong>Hosting providers</strong> — for the Fireporter backend (serverless deployment and standard operational logs)</li>
         <li><strong>Email delivery provider</strong> — used only to send support tickets you submit to the developer's inbox</li>
       </ul>
       <p>
