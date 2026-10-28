@@ -353,7 +353,7 @@
           <span class="step-num">03</span>
           <div>
             <h3>Open Fireporter and click Export</h3>
-            <p>The Export tab turns your selection into Roblox-ready data and shows it in the code box.</p>
+            <p>The Export tab turns your selection into Roblox-ready data and shows it in the code box. In Normal mode images are not uploaded; to have them uploaded for you, use Upload mode (see Beta features).</p>
           </div>
         </div>
         <div class="step">
@@ -467,9 +467,11 @@
         <div class="feature-item">
           <div class="feature-head"><h4>Connect your Roblox account</h4><span class="tier tier-advanced">Advanced</span></div>
           <p>
-            Required for Live Mode and for auto-uploading images. Go to the <strong>Account</strong>
-            tab and log in with Roblox — this only grants access for delivering exports and
-            uploading images, as described in the <a href="privacy.html" style="color:var(--accent);">privacy policy</a>.
+            Required for Upload mode and for image uploads in Auto Mode. Open the <strong>Account</strong>
+            tab and log in with Roblox. After you approve access in your browser, the page shows a
+            connection code. Copy it, switch back to Figma, paste it into the Connect Roblox prompt
+            and confirm. The code is stored only on your device, and the access it grants is limited
+            to uploading images, as described in the <a href="privacy.html" style="color:var(--accent);">privacy policy</a>.
           </p>
         </div>
 
@@ -513,16 +515,22 @@
         </div>
         <div class="feature-item">
           <div class="feature-head"><h4>Auto Mode</h4><span class="tier tier-beta">Beta</span></div>
-          <p>A more hands-off export: structural layers default to Frame and text defaults to TextLabel without tagging, images are automatically rasterized, and — if you're logged in — automatically uploaded to Roblox for you.</p>
+          <p>A more hands-off export: structural layers default to Frame and text defaults to TextLabel without tagging, images are automatically rasterized, and, if you're logged in, uploaded to Roblox with their asset IDs filled into the export. Without a login you still get the JSON, but images are not uploaded.</p>
         </div>
         <div class="feature-item">
-          <div class="feature-head"><h4>Filter (Live Mode only)</h4><span class="tier tier-beta">Beta</span></div>
-          <p>Right-click the Filter toggle to choose grayscale or a custom tint color, and which element types it applies to (text, frames, image labels, image buttons). Only affects Live Mode exports.</p>
+          <div class="feature-head"><h4>Filter (Upload mode only)</h4><span class="tier tier-beta">Beta</span></div>
+          <p>Right-click the Filter toggle to choose grayscale or a custom tint color, and which element types it applies to (text, frames, image labels, image buttons). Only affects Upload mode exports.</p>
         </div>
         <div class="feature-item">
-          <div class="feature-head"><h4>Live Mode</h4><span class="tier tier-beta">Beta</span></div>
-          <p>Requires a connected Roblox account. Sends your export straight to an open Roblox Studio session over the network — no copy-pasting JSON. Studio polls automatically and builds the UI as soon as it arrives.</p>
+          <div class="feature-head"><h4>Upload mode</h4><span class="tier tier-beta">Beta</span></div>
+          <p>Requires a connected Roblox account. Uploads the images in your selection to your Roblox account and writes their asset IDs into the exported JSON, so images appear as soon as you paste it into Studio. Only the images are sent for upload. The rest of your design data stays in the plugin, and you still copy the JSON and paste it into Studio yourself.</p>
         </div>
+      </div>
+
+      <div class="callout">
+        <strong>Looking for Live Mode?</strong> It has been replaced by Upload mode. Exports are
+        no longer sent to Studio automatically. You copy the JSON and paste it, and your images
+        are still uploaded for you.
       </div>
 
       <div class="callout">
