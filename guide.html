@@ -327,6 +327,7 @@
         <li><a href="#basics">Basics</a></li>
         <li><a href="#advanced">Advanced</a></li>
         <li><a href="#beta">Beta features</a></li>
+        <li><a href="#preview">Preview Roblox UI</a></li>
         <li><a href="#studio">Roblox Studio plugin</a></li>
       </ol>
     </nav>
@@ -401,7 +402,7 @@
         </div>
         <div class="feature-item">
           <div class="feature-head"><h4>Include Text</h4><span class="tier">Basics</span></div>
-          <p>Keeps text layers as real, editable <code>TextLabel</code> instances instead of flattening them into images.</p>
+          <p>Keeps text layers as real, editable <code>TextLabel</code> instances instead of flattening them into images. A word that Figma wraps over several lines without spaces turns on <code>RichText</code> automatically so it looks the same in Roblox.</p>
         </div>
         <div class="feature-item">
           <div class="feature-head"><h4>Text Auto Scale</h4><span class="tier">Basics</span></div>
@@ -504,7 +505,7 @@
         </div>
         <div class="feature-item">
           <div class="feature-head"><h4>Respect Shadows</h4><span class="tier tier-beta">Beta</span></div>
-          <p>Exports Figma drop shadows as a Roblox <code>UIShadow</code>, carrying over blur radius, offset, spread, color, and transparency.</p>
+          <p>Exports Figma drop shadows as a Roblox <code>UIShadow</code>, carrying over blur radius, offset, spread, color, and transparency. Shadows on real text use the UIShadow <code>Text</code> mode; everything else uses <code>Shape</code>.</p>
         </div>
         <div class="feature-item">
           <div class="feature-head"><h4>Respect Corners</h4><span class="tier tier-beta">Beta</span></div>
@@ -516,11 +517,15 @@
         </div>
         <div class="feature-item">
           <div class="feature-head"><h4>Auto Mode</h4><span class="tier tier-beta">Beta</span></div>
-          <p>A more hands-off export: structural layers default to Frame and text defaults to TextLabel without tagging, images are automatically rasterized, and, if you're logged in, uploaded to Roblox with their asset IDs filled into the export. Without a login you still get the JSON, but images are not uploaded.</p>
+          <p>A more hands-off export: structural layers default to Frame and text defaults to TextLabel without tagging. Figma <strong>vector path</strong> layers are exported as images (ImageLabel, or ImageButton when tagged <code>_button</code>), and identical images are merged so each one is uploaded only once. Text with an unsupported font is turned into an image with its shadow baked in, so it never gets a second UIShadow. If you're logged in, images are uploaded to Roblox with their asset IDs filled into the export. Without a login you still get the JSON, but images are not uploaded.</p>
         </div>
         <div class="feature-item">
           <div class="feature-head"><h4>Filter (Upload mode only)</h4><span class="tier tier-beta">Beta</span></div>
           <p>Right-click the Filter toggle to choose grayscale or a custom tint color, and which element types it applies to (text, frames, image labels, image buttons). Only affects Upload mode exports.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-head"><h4>Preview Roblox UI</h4><span class="tier tier-beta">Beta</span></div>
+          <p>Opens a window that shows how your selection will look in Roblox Studio. See the <a href="#preview" style="color:var(--accent);">section below</a> for details.</p>
         </div>
         <div class="feature-item">
           <div class="feature-head"><h4>Upload mode</h4><span class="tier tier-beta">Beta</span></div>
@@ -538,6 +543,36 @@
         You may also notice a locked, disabled button in the toolbar —
         <span class="tier tier-locked">Coming soon</span> — that's a feature slot that isn't
         available yet.
+      </div>
+    </section>
+
+    <section class="block" id="preview">
+      <div class="feature-head" style="margin-bottom:6px;">
+        <h2 style="margin-bottom:0;">Preview Roblox UI</h2>
+        <span class="tier tier-beta">Beta</span>
+      </div>
+      <p class="section-lead">
+        Check your design before it ever reaches Studio. The preview is built from the same data
+        the export produces, so strokes, corners, gradients, shadows, and text appear the way
+        they will in Roblox.
+      </p>
+      <div class="feature-list">
+        <div class="feature-item">
+          <div class="feature-head"><h4>Turn it on</h4><span class="tier">Basics</span></div>
+          <p>Select a layer, switch on <strong>Preview Roblox UI</strong>, and the preview window opens. Use <strong>Refresh</strong> after you change something in Figma.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-head"><h4>Matches your export mode</h4><span class="tier">Basics</span></div>
+          <p>The preview follows Normal, Upload, ZIP, and Auto mode, so shapes that become images in Upload or Auto mode are shown as images too.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-head"><h4>Screen size and background</h4><span class="tier">Basics</span></div>
+          <p>Pick a screen size and a background: Dark, Light, Baseplate, or Checker. A blur slider softens the background, and you drag it with the mouse held down.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-head"><h4>Zoom and pan</h4><span class="tier">Basics</span></div>
+          <p>Scroll or use the zoom controls to zoom smoothly, and drag the preview to move around.</p>
+        </div>
       </div>
     </section>
 
