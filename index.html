@@ -201,6 +201,40 @@
     footer.site a { color: var(--muted); text-decoration: none; }
     footer.site a:hover { color: var(--accent); }
 
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 18px 0 14px;
+    }
+    .stats[hidden] { display: none; }
+    .stat {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+    .stat[hidden] { display: none; }
+    .stat-num {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      font-variant-numeric: tabular-nums;
+    }
+    .stat-label { font-size: 12px; color: var(--dim); }
+    .live-dot {
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-right: 6px;
+      vertical-align: middle;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 50% { opacity: .35; } }
+    @media (prefers-reduced-motion: reduce) { .live-dot { animation: none; } }
+
     @media (max-width: 480px) {
       header.site { flex-direction: column; align-items: flex-start; gap: 12px; }
       .plugin-links { flex-direction: column; }
@@ -237,6 +271,11 @@
         <a class="btn btn-secondary" href="https://create.roblox.com/store/asset/85390849505858/Fireporter" target="_blank" rel="noopener">Roblox Plugin</a>
         <a class="btn btn-secondary" href="https://www.figma.com/community/plugin/1525922126871670955/fireporter" target="_blank" rel="noopener">Figma Plugin</a>
       </div>
+      <div class="stats" id="stats" hidden aria-label="Fireporter on Figma, live numbers">
+        <div class="stat" id="statUsers" hidden><div class="stat-num" data-n>0</div><div class="stat-label"><span class="live-dot"></span>Users</div></div>
+        <div class="stat" id="statLikes" hidden><div class="stat-num" data-n>0</div><div class="stat-label"><span class="live-dot"></span>Likes</div></div>
+        <div class="stat" id="statSaves" hidden><div class="stat-num" data-n>0</div><div class="stat-label"><span class="live-dot"></span>Saves</div></div>
+      </div>
       <p class="hint">Signing in is only needed to upload images, and gives you a connection code to paste into the Figma plugin. Your layout data never leaves the plugin.</p>
     </section>
 
@@ -245,7 +284,7 @@
         <span class="step-num">01</span>
         <div>
           <h3>Select in Figma</h3>
-          <p>Choose a frame or layer group. Fireporter reads layout, fills, text, and effects.</p>
+          <p>Choose a frame or layer group. Fireporter reads layout, fills, text, and effects. Turn on <strong>Preview Roblox UI</strong> to see how it will look in Studio before you export.</p>
         </div>
       </div>
       <div class="step">
@@ -282,6 +321,41 @@
     }
 
     const state = generateState();
+
+    // Live plugin numbers (Users / Likes / Saves). A number that can't be read is simply hidden.
+    (function () {
+      var shown = {};
+      function fmt(n) { return Number(n).toLocaleString('en-US'); }
+      function animate(el, from, to) {
+        if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) { el.textContent = fmt(to); return; }
+        var t0 = performance.now(), dur = 900;
+        (function step(t) {
+          var k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+          el.textContent = fmt(Math.round(from + (to - from) * e));
+          if (k < 1) requestAnimationFrame(step);
+        })(t0);
+      }
+      function apply(data) {
+        var any = false;
+        [['statUsers', 'users'], ['statLikes', 'likes'], ['statSaves', 'saves']].forEach(function (p) {
+          var box = document.getElementById(p[0]), v = data && data[p[1]];
+          if (!box) return;
+          if (typeof v !== 'number' || !isFinite(v)) { box.hidden = true; return; }
+          any = true; box.hidden = false;
+          var num = box.querySelector('[data-n]');
+          if (shown[p[1]] !== v) { animate(num, shown[p[1]] || 0, v); shown[p[1]] = v; }
+        });
+        document.getElementById('stats').hidden = !any;
+      }
+      function load() {
+        fetch(BACKEND + '/api/stats', { cache: 'no-store' })
+          .then(function (r) { return r.ok ? r.json() : null; })
+          .then(apply)
+          .catch(function () {});
+      }
+      load();
+      setInterval(function () { if (!document.hidden) load(); }, 60000);
+    })();
     document.getElementById("connectBtn").href =
       BACKEND + "/api/authorize?state=" + encodeURIComponent(state);
   </script>
