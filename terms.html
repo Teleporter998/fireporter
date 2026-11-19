@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Terms of Service for Fireporter — Figma to Roblox UI exporter." />
+  <title>Terms of Service · Fireporter</title>
+  <link rel="icon" href="assets/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/favicon.png" />
+  <script>try{var t=localStorage.getItem("fp-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+  <style>
+    /* Fireporter — workbench skin (shared look with the founder console) */
+    :root {
+      color-scheme: dark;
+      --bg: #14120f; --bg2: #191611; --surface: #1d1a15; --surface-2: #262219;
+      --line: #3a3328; --line-hi: #5a4f3e;
+      --text: #f0e9da; --muted: #aca291; --dim: #7d7464;
+      --accent: #ff7a2f; --accent-2: #ffa266; --ink: #14120f;
+      --grid: rgba(240, 233, 218, 0.035); --hard: #000;
+      --sans: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+      --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+      --mono: ui-monospace, "Cascadia Code", "SF Mono", "JetBrains Mono", Consolas, "Liberation Mono", monospace;
+    }
+    :root[data-theme="light"] {
+      color-scheme: light;
+      --bg: #f1ece0; --bg2: #ebe5d6; --surface: #faf7ef; --surface-2: #f2ede0;
+      --line: #d6ccb7; --line-hi: #b3a68b;
+      --text: #201b13; --muted: #6a604f; --dim: #8d8370;
+      --accent: #d9530f; --accent-2: #b9440a; --ink: #fff7ea;
+      --grid: rgba(32, 27, 19, 0.05); --hard: #201b13;
+    }
+    @media (prefers-color-scheme: light) {
+      :root:not([data-theme="dark"]) {
+        color-scheme: light;
+        --bg: #f1ece0; --bg2: #ebe5d6; --surface: #faf7ef; --surface-2: #f2ede0;
+        --line: #d6ccb7; --line-hi: #b3a68b;
+        --text: #201b13; --muted: #6a604f; --dim: #8d8370;
+        --accent: #d9530f; --accent-2: #b9440a; --ink: #fff7ea;
+        --grid: rgba(32, 27, 19, 0.05); --hard: #201b13;
+      }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background-color: var(--bg);
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 36px 36px;
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    ::selection { background: var(--accent); color: var(--ink); }
+    a { color: var(--accent-2); text-underline-offset: 3px; }
+    a:hover { color: var(--accent); }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    code { font-family: var(--mono); font-size: 0.9em; color: var(--accent-2); }
+
+    .wrap { max-width: 760px; margin: 0 auto; padding: 32px 24px 64px; }
+    .wrap.wide { max-width: 860px; }
+
+    /* ── header ── */
+    header.site {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding-bottom: 16px; margin-bottom: 56px;
+      border-bottom: 1px solid var(--line);
+    }
+    .brand {
+      display: flex; align-items: center; gap: 11px; text-decoration: none; color: var(--text);
+      font: 700 20px/1 var(--serif); letter-spacing: -0.01em;
+    }
+    .brand:hover { color: var(--text); }
+    .brand-logo {
+      width: 30px; height: 30px; border-radius: 3px; object-fit: cover; background: var(--surface);
+      box-shadow: 2px 2px 0 var(--hard); border: 1px solid var(--line-hi);
+    }
+    .head-right { display: flex; align-items: center; gap: 18px; }
+    nav.site-nav { display: flex; gap: 20px; flex-wrap: wrap; }
+    nav.site-nav a {
+      font: 600 11.5px var(--mono); letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none; padding: 3px 0; border-bottom: 2px solid transparent;
+    }
+    nav.site-nav a:hover { color: var(--text); border-color: var(--line-hi); }
+    nav.site-nav a.active { color: var(--accent); border-color: var(--accent); }
+    .theme-btn {
+      width: 30px; height: 30px; border: 1px solid var(--line-hi); background: transparent; color: var(--muted);
+      border-radius: 3px; cursor: pointer; display: grid; place-items: center; font: 14px/1 var(--mono);
+    }
+    .theme-btn:hover { color: var(--text); border-color: var(--text); box-shadow: 2px 2px 0 var(--hard); }
+
+    /* ── headings / hero ── */
+    .meta {
+      font: 11.5px var(--mono); letter-spacing: 0.06em; color: var(--dim); margin-bottom: 14px;
+      display: flex; align-items: center; gap: 10px; text-transform: uppercase;
+    }
+    .meta::before { content: ""; width: 22px; height: 2px; background: var(--accent); }
+    .hero { margin-bottom: 48px; }
+    h1 {
+      font: 600 clamp(36px, 7vw, 64px)/1 var(--serif); letter-spacing: -0.035em; margin-bottom: 18px;
+    }
+    h1 em { font-style: italic; color: var(--accent); }
+    .hero.page h1 { font-size: clamp(32px, 5.5vw, 48px); }
+    .lead { font-size: 16px; color: var(--muted); max-width: 54ch; }
+    .lead strong { color: var(--text); font-weight: 600; }
+    .updated { font: 12px var(--mono); color: var(--dim); letter-spacing: 0.04em; margin-bottom: 4px; }
+    .hero-logo { display: none; }
+
+    /* ── buttons ── */
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 28px 0 14px; }
+    .plugin-links { display: flex; gap: 12px; margin-bottom: 14px; }
+    .plugin-links .btn { flex: 1 1 0; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      font: 700 12px var(--mono); letter-spacing: 0.03em; text-decoration: none;
+      padding: 11px 18px; border-radius: 3px; border: 1px solid var(--line-hi); cursor: pointer;
+      transition: transform 0.1s, box-shadow 0.1s, border-color 0.12s, background 0.12s;
+    }
+    .btn-primary { background: var(--accent); color: var(--ink); border-color: var(--accent); box-shadow: 3px 3px 0 var(--hard); }
+    .btn-primary:hover { background: var(--accent-2); border-color: var(--accent-2); color: var(--ink); transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--hard); }
+    .btn-primary:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--hard); }
+    .btn-secondary { background: transparent; color: var(--text); }
+    .btn-secondary:hover { border-color: var(--text); color: var(--text); transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--hard); }
+    .btn-secondary:active { transform: translate(1px, 1px); box-shadow: none; }
+    .hint { font: 11.5px/1.6 var(--mono); color: var(--dim); max-width: 62ch; }
+
+    /* ── numbers ledger ── */
+    .numbers { margin: 0 0 56px; }
+    .numbers[hidden] { display: none; }
+    .numbers h2 { font: 600 clamp(24px, 4vw, 30px)/1.1 var(--serif); letter-spacing: -0.02em; margin-bottom: 6px; }
+    .numbers h2 span { font-style: italic; color: var(--accent); }
+    .numbers .sub { font: 11.5px var(--mono); color: var(--dim); letter-spacing: 0.03em; margin-bottom: 22px; }
+    .numbers-row { display: flex; border-top: 2px solid var(--text); border-bottom: 1px solid var(--line); }
+    .stat { flex: 1 1 0; padding: 18px 0 18px 20px; min-width: 0; }
+    .stat[hidden] { display: none; }
+    .stat:not([hidden]) ~ .stat:not([hidden]) { border-left: 1px solid var(--line); }
+    .stat:not([hidden]):first-child { padding-left: 0; }
+    .stat-label { font: 700 10px var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+    .stat-num {
+      font: 600 clamp(40px, 9vw, 72px)/1 var(--serif); letter-spacing: -0.04em;
+      font-variant-numeric: tabular-nums; margin-top: 8px;
+    }
+
+    /* ── steps (home + guide) ── */
+    .steps { border-top: 2px solid var(--text); margin-top: 8px; }
+    .step {
+      display: grid; grid-template-columns: 52px 1fr; gap: 14px; padding: 22px 0; border-bottom: 1px solid var(--line);
+    }
+    .step-num { font: 600 30px/1 var(--serif); color: var(--accent); letter-spacing: -0.03em; }
+    .step h3 { font: 600 19px/1.25 var(--serif); margin-bottom: 5px; letter-spacing: -0.01em; }
+    .step p { font-size: 14px; color: var(--muted); max-width: 52ch; }
+    .step p strong { color: var(--text); }
+    .step code { background: var(--surface); border: 1px solid var(--line); padding: 1px 6px; border-radius: 2px; }
+
+    /* ── guide ── */
+    .toc {
+      background: var(--surface); border: 1px solid var(--line); border-radius: 3px;
+      padding: 18px 20px; margin-bottom: 44px; box-shadow: 4px 4px 0 var(--hard);
+    }
+    .toc-title { font: 700 10px var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    .toc ol { margin: 0; padding: 0; list-style: none; counter-reset: toc; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 6px 24px; }
+    .toc li { counter-increment: toc; display: flex; gap: 10px; align-items: baseline; }
+    .toc li::before { content: counter(toc, decimal-leading-zero); font: 10.5px var(--mono); color: var(--dim); }
+    .toc a { font-size: 13.5px; color: var(--muted); text-decoration: none; }
+    .toc a:hover { color: var(--accent); }
+
+    section.block { margin-bottom: 56px; }
+    section.block h2 { font: 600 28px/1.15 var(--serif); letter-spacing: -0.02em; margin-bottom: 6px; }
+    section.block > p.section-lead, section.block > .feature-head + p.section-lead {
+      font-size: 14px; color: var(--muted); margin-bottom: 22px; max-width: 58ch;
+    }
+    section.block > .feature-head { padding-bottom: 0; }
+
+    .tier {
+      display: inline-flex; align-items: center; font: 700 10px var(--mono); letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 2px 8px; border-radius: 2px; border: 1px solid var(--line-hi); color: var(--muted); white-space: nowrap; flex-shrink: 0;
+    }
+    .tier-advanced { color: var(--accent); border-color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, transparent); }
+    .tier-beta { color: var(--muted); border-style: dashed; }
+    .tier-locked { color: var(--dim); border-color: var(--line); opacity: 0.85; }
+
+    .feature-list { display: flex; flex-direction: column; border-top: 2px solid var(--text); }
+    .feature-item { padding: 16px 0; border-bottom: 1px solid var(--line); }
+    .feature-item:first-child { border-top: 0; }
+    .feature-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 5px; }
+    .feature-head h4 { font: 600 17px/1.3 var(--serif); letter-spacing: -0.005em; }
+    .feature-item p { font-size: 13.5px; color: var(--muted); max-width: 60ch; }
+    .feature-item p strong { color: var(--text); }
+
+    .tag-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 4px; }
+    .tag-table th, .tag-table td { text-align: left; padding: 10px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    .tag-table th { font: 700 10px var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); background: var(--surface-2); }
+    .tag-table td.tag-name { font-family: var(--mono); color: var(--accent); white-space: nowrap; }
+    .tag-table td { color: var(--muted); }
+
+    .callout {
+      background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 2px;
+      padding: 14px 16px; font-size: 13px; color: var(--muted); margin-top: 16px;
+    }
+    .callout strong { color: var(--text); }
+    .callout a { color: var(--accent-2); }
+
+    /* ── legal pages ── */
+    .wrap { counter-reset: entry; }
+    section.entry { padding: 26px 0; border-bottom: 1px solid var(--line); counter-increment: entry; position: relative; }
+    section.entry:first-of-type { border-top: 2px solid var(--text); }
+    section.entry h2 { font: 600 22px/1.2 var(--serif); letter-spacing: -0.015em; margin-bottom: 10px; display: flex; align-items: baseline; gap: 12px; }
+    section.entry h2::before { content: counter(entry, decimal-leading-zero); font: 700 11px var(--mono); letter-spacing: 0.1em; color: var(--accent); }
+    section.entry p, section.entry li { font-size: 14px; color: var(--muted); }
+    section.entry p + p { margin-top: 10px; }
+    section.entry ul { margin: 10px 0 0 1.15em; display: flex; flex-direction: column; gap: 8px; }
+    section.entry li::marker { color: var(--accent); }
+    section.entry strong { color: var(--text); font-weight: 600; }
+
+    /* ── footer ── */
+    footer.site {
+      margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--line);
+      display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center;
+      font: 11.5px var(--mono); letter-spacing: 0.03em; color: var(--dim);
+    }
+    footer.site a { color: var(--muted); text-decoration: none; }
+    footer.site a:hover { color: var(--accent); }
+
+    @media (max-width: 560px) {
+      .wrap { padding: 24px 18px 48px; }
+      header.site { flex-direction: column; align-items: flex-start; gap: 14px; margin-bottom: 40px; }
+      .head-right { width: 100%; justify-content: space-between; }
+      .plugin-links { flex-direction: column; }
+      .step { grid-template-columns: 40px 1fr; }
+      .feature-head { flex-direction: column; align-items: flex-start; gap: 6px; }
+      .tag-table { font-size: 12px; }
+      .numbers-row { flex-wrap: wrap; }
+      .stat { flex: 1 1 45%; padding-left: 14px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn { transition: none; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="site">
+      <a class="brand" href="index.html">
+        <img class="brand-logo" src="assets/FireporterPluginImage_new.png" width="26" height="26" alt="Fireporter" />
+        Fireporter
+      </a>
+      <div class="head-right">
+      <nav class="site-nav" aria-label="Legal">
+        <a href="index.html">Home</a>
+        <a href="guide.html">Guide</a>
+        <a href="privacy.html">Privacy</a>
+        <a class="active" href="terms.html">Terms</a>
+      </nav>
+        <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch light or dark theme" title="Switch theme"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M7 1.5a5.5 5.5 0 0 1 0 11z" fill="currentColor"/></svg></button>
+      </div>
+    </header>
+
+    <div class="hero page">
+      <p class="meta">Terms</p>
+      <h1>Terms of <em>Service</em></h1>
+      <p class="updated">Last updated: October 28, 2026</p>
+      <p class="lead">
+        By installing or using Fireporter (Figma plugin, Roblox Studio plugin, or related online
+        features), you agree to these terms.
+      </p>
+    </div>
+
+    <nav class="toc" aria-label="On this page">
+      <div class="toc-title">On this page</div>
+      <ol>
+        <li><a href="#acceptable-use">Acceptable use</a></li>
+        <li><a href="#ownership">Ownership</a></li>
+        <li><a href="#accounts">Accounts &amp; platforms</a></li>
+        <li><a href="#no-warranty">No warranty</a></li>
+        <li><a href="#liability">Limitation of liability</a></li>
+        <li><a href="#changes">Changes</a></li>
+        <li><a href="#termination">Termination</a></li>
+      </ol>
+    </nav>
+
+    <section class="entry" id="acceptable-use">
+      <h2>Acceptable use</h2>
+      <p>You agree not to use Fireporter to export, import, upload, or process content that is:</p>
+      <ul>
+        <li>Sexual, pornographic, or otherwise NSFW</li>
+        <li>Illegal, hateful, harassing, or violent in a way that violates platform rules</li>
+        <li>Intended to bypass Roblox, Figma, or Fireporter safety or moderation systems</li>
+      </ul>
+      <p>
+        You also agree not to abuse image upload or related services (for example flooding
+        uploads or attempting to disrupt the backend). The same
+        rules apply to anything you submit through a support ticket, including attachments —
+        submitting harmful, illegal, or abusive content through a ticket is not allowed, and we
+        may ignore or block tickets that violate this.
+      </p>
+    </section>
+
+    <section class="entry" id="ownership">
+      <h2>Ownership</h2>
+      <p>
+        Fireporter does <strong>not</strong> claim ownership of the designs, layers, images, or
+        other content you export or import. You remain responsible for having the rights to any
+        Figma files, assets, and Roblox content you process with the plugin.
+      </p>
+      <p>
+        The Fireporter software, name, and branding remain the property of the developer.
+      </p>
+    </section>
+
+    <section class="entry" id="accounts">
+      <h2>Accounts &amp; platforms</h2>
+      <p>
+        When you connect a Roblox account or use Roblox asset upload, you must also follow
+        <strong>Roblox's Terms of Use</strong> and community standards. When you use the Figma
+        plugin, you must follow <strong>Figma's</strong> applicable terms and policies.
+      </p>
+      <p>
+        Fireporter may refuse or limit features if your use violates these Terms, Roblox rules,
+        or Figma rules.
+      </p>
+    </section>
+
+    <section class="entry" id="no-warranty">
+      <h2>No warranty</h2>
+      <p>
+        Fireporter is provided <strong>"as is"</strong> and <strong>"as available"</strong>,
+        without warranty of any kind, express or implied — including merchantability, fitness for
+        a particular purpose, and non-infringement.
+      </p>
+      <p>
+        We do not guarantee that exports will be pixel-perfect on every device, that the image
+        upload service will always be available, or that Roblox will accept every uploaded image.
+      </p>
+    </section>
+
+    <section class="entry" id="liability">
+      <h2>Limitation of liability</h2>
+      <p>
+        To the fullest extent permitted by law, the developer of Fireporter is not liable for any
+        indirect, incidental, special, consequential, or punitive damages, or for any loss of
+        data, profits, or business, arising from your use of (or inability to use) the plugin.
+      </p>
+      <p>
+        You use Fireporter at your own risk, including risk related to moderation outcomes and
+        third-party platform decisions.
+      </p>
+    </section>
+
+    <section class="entry" id="changes">
+      <h2>Changes</h2>
+      <p>
+        Features of Fireporter may change over time (including upload behavior, available modes, and UI).
+        We may update these Terms when needed. Continued use after an update means you accept the
+        revised Terms. The "Last updated" date at the top will change when we revise this page.
+      </p>
+    </section>
+
+    <section class="entry" id="termination">
+      <h2>Termination</h2>
+      <p>
+        Access to Fireporter may be restricted or revoked in cases of abuse, violation of these
+        Terms, or violation of Figma or Roblox policies.
+      </p>
+      <p>
+        You may stop using Fireporter at any time by uninstalling the plugins and logging out of
+        optional Roblox sessions.
+      </p>
+    </section>
+
+    <footer class="site">
+      <span>© 2026 Fireporter</span>
+      <span><a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms of Service</a></span>
+    </footer>
+  </div>
+  <script>
+    (function () {
+      var b = document.getElementById("themeBtn"); if (!b) return;
+      function cur() {
+        var t = document.documentElement.getAttribute("data-theme");
+        if (t) return t;
+        return window.matchMedia && matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+      }
+      b.addEventListener("click", function () {
+        var n = cur() === "light" ? "dark" : "light";
+        document.documentElement.setAttribute("data-theme", n);
+        try { localStorage.setItem("fp-theme", n); } catch (e) {}
+      });
+    })();
+  </script>
+</body>
+</html>

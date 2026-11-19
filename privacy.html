@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Privacy Policy for Fireporter — Figma to Roblox UI exporter." />
+  <title>Privacy Policy · Fireporter</title>
+  <link rel="icon" href="assets/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/favicon.png" />
+  <script>try{var t=localStorage.getItem("fp-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+  <style>
+    /* Fireporter — workbench skin (shared look with the founder console) */
+    :root {
+      color-scheme: dark;
+      --bg: #14120f; --bg2: #191611; --surface: #1d1a15; --surface-2: #262219;
+      --line: #3a3328; --line-hi: #5a4f3e;
+      --text: #f0e9da; --muted: #aca291; --dim: #7d7464;
+      --accent: #ff7a2f; --accent-2: #ffa266; --ink: #14120f;
+      --grid: rgba(240, 233, 218, 0.035); --hard: #000;
+      --sans: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+      --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+      --mono: ui-monospace, "Cascadia Code", "SF Mono", "JetBrains Mono", Consolas, "Liberation Mono", monospace;
+    }
+    :root[data-theme="light"] {
+      color-scheme: light;
+      --bg: #f1ece0; --bg2: #ebe5d6; --surface: #faf7ef; --surface-2: #f2ede0;
+      --line: #d6ccb7; --line-hi: #b3a68b;
+      --text: #201b13; --muted: #6a604f; --dim: #8d8370;
+      --accent: #d9530f; --accent-2: #b9440a; --ink: #fff7ea;
+      --grid: rgba(32, 27, 19, 0.05); --hard: #201b13;
+    }
+    @media (prefers-color-scheme: light) {
+      :root:not([data-theme="dark"]) {
+        color-scheme: light;
+        --bg: #f1ece0; --bg2: #ebe5d6; --surface: #faf7ef; --surface-2: #f2ede0;
+        --line: #d6ccb7; --line-hi: #b3a68b;
+        --text: #201b13; --muted: #6a604f; --dim: #8d8370;
+        --accent: #d9530f; --accent-2: #b9440a; --ink: #fff7ea;
+        --grid: rgba(32, 27, 19, 0.05); --hard: #201b13;
+      }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background-color: var(--bg);
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 36px 36px;
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    ::selection { background: var(--accent); color: var(--ink); }
+    a { color: var(--accent-2); text-underline-offset: 3px; }
+    a:hover { color: var(--accent); }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    code { font-family: var(--mono); font-size: 0.9em; color: var(--accent-2); }
+
+    .wrap { max-width: 760px; margin: 0 auto; padding: 32px 24px 64px; }
+    .wrap.wide { max-width: 860px; }
+
+    /* ── header ── */
+    header.site {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding-bottom: 16px; margin-bottom: 56px;
+      border-bottom: 1px solid var(--line);
+    }
+    .brand {
+      display: flex; align-items: center; gap: 11px; text-decoration: none; color: var(--text);
+      font: 700 20px/1 var(--serif); letter-spacing: -0.01em;
+    }
+    .brand:hover { color: var(--text); }
+    .brand-logo {
+      width: 30px; height: 30px; border-radius: 3px; object-fit: cover; background: var(--surface);
+      box-shadow: 2px 2px 0 var(--hard); border: 1px solid var(--line-hi);
+    }
+    .head-right { display: flex; align-items: center; gap: 18px; }
+    nav.site-nav { display: flex; gap: 20px; flex-wrap: wrap; }
+    nav.site-nav a {
+      font: 600 11.5px var(--mono); letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none; padding: 3px 0; border-bottom: 2px solid transparent;
+    }
+    nav.site-nav a:hover { color: var(--text); border-color: var(--line-hi); }
+    nav.site-nav a.active { color: var(--accent); border-color: var(--accent); }
+    .theme-btn {
+      width: 30px; height: 30px; border: 1px solid var(--line-hi); background: transparent; color: var(--muted);
+      border-radius: 3px; cursor: pointer; display: grid; place-items: center; font: 14px/1 var(--mono);
+    }
+    .theme-btn:hover { color: var(--text); border-color: var(--text); box-shadow: 2px 2px 0 var(--hard); }
+
+    /* ── headings / hero ── */
+    .meta {
+      font: 11.5px var(--mono); letter-spacing: 0.06em; color: var(--dim); margin-bottom: 14px;
+      display: flex; align-items: center; gap: 10px; text-transform: uppercase;
+    }
+    .meta::before { content: ""; width: 22px; height: 2px; background: var(--accent); }
+    .hero { margin-bottom: 48px; }
+    h1 {
+      font: 600 clamp(36px, 7vw, 64px)/1 var(--serif); letter-spacing: -0.035em; margin-bottom: 18px;
+    }
+    h1 em { font-style: italic; color: var(--accent); }
+    .hero.page h1 { font-size: clamp(32px, 5.5vw, 48px); }
+    .lead { font-size: 16px; color: var(--muted); max-width: 54ch; }
+    .lead strong { color: var(--text); font-weight: 600; }
+    .updated { font: 12px var(--mono); color: var(--dim); letter-spacing: 0.04em; margin-bottom: 4px; }
+    .hero-logo { display: none; }
+
+    /* ── buttons ── */
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 28px 0 14px; }
+    .plugin-links { display: flex; gap: 12px; margin-bottom: 14px; }
+    .plugin-links .btn { flex: 1 1 0; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      font: 700 12px var(--mono); letter-spacing: 0.03em; text-decoration: none;
+      padding: 11px 18px; border-radius: 3px; border: 1px solid var(--line-hi); cursor: pointer;
+      transition: transform 0.1s, box-shadow 0.1s, border-color 0.12s, background 0.12s;
+    }
+    .btn-primary { background: var(--accent); color: var(--ink); border-color: var(--accent); box-shadow: 3px 3px 0 var(--hard); }
+    .btn-primary:hover { background: var(--accent-2); border-color: var(--accent-2); color: var(--ink); transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--hard); }
+    .btn-primary:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--hard); }
+    .btn-secondary { background: transparent; color: var(--text); }
+    .btn-secondary:hover { border-color: var(--text); color: var(--text); transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--hard); }
+    .btn-secondary:active { transform: translate(1px, 1px); box-shadow: none; }
+    .hint { font: 11.5px/1.6 var(--mono); color: var(--dim); max-width: 62ch; }
+
+    /* ── numbers ledger ── */
+    .numbers { margin: 0 0 56px; }
+    .numbers[hidden] { display: none; }
+    .numbers h2 { font: 600 clamp(24px, 4vw, 30px)/1.1 var(--serif); letter-spacing: -0.02em; margin-bottom: 6px; }
+    .numbers h2 span { font-style: italic; color: var(--accent); }
+    .numbers .sub { font: 11.5px var(--mono); color: var(--dim); letter-spacing: 0.03em; margin-bottom: 22px; }
+    .numbers-row { display: flex; border-top: 2px solid var(--text); border-bottom: 1px solid var(--line); }
+    .stat { flex: 1 1 0; padding: 18px 0 18px 20px; min-width: 0; }
+    .stat[hidden] { display: none; }
+    .stat:not([hidden]) ~ .stat:not([hidden]) { border-left: 1px solid var(--line); }
+    .stat:not([hidden]):first-child { padding-left: 0; }
+    .stat-label { font: 700 10px var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+    .stat-num {
+      font: 600 clamp(40px, 9vw, 72px)/1 var(--serif); letter-spacing: -0.04em;
+      font-variant-numeric: tabular-nums; margin-top: 8px;
+    }
+
+    /* ── steps (home + guide) ── */
+    .steps { border-top: 2px solid var(--text); margin-top: 8px; }
+    .step {
+      display: grid; grid-template-columns: 52px 1fr; gap: 14px; padding: 22px 0; border-bottom: 1px solid var(--line);
+    }
+    .step-num { font: 600 30px/1 var(--serif); color: var(--accent); letter-spacing: -0.03em; }
+    .step h3 { font: 600 19px/1.25 var(--serif); margin-bottom: 5px; letter-spacing: -0.01em; }
+    .step p { font-size: 14px; color: var(--muted); max-width: 52ch; }
+    .step p strong { color: var(--text); }
+    .step code { background: var(--surface); border: 1px solid var(--line); padding: 1px 6px; border-radius: 2px; }
+
+    /* ── guide ── */
+    .toc {
+      background: var(--surface); border: 1px solid var(--line); border-radius: 3px;
+      padding: 18px 20px; margin-bottom: 44px; box-shadow: 4px 4px 0 var(--hard);
+    }
+    .toc-title { font: 700 10px var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    .toc ol { margin: 0; padding: 0; list-style: none; counter-reset: toc; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 6px 24px; }
+    .toc li { counter-increment: toc; display: flex; gap: 10px; align-items: baseline; }
+    .toc li::before { content: counter(toc, decimal-leading-zero); font: 10.5px var(--mono); color: var(--dim); }
+    .toc a { font-size: 13.5px; color: var(--muted); text-decoration: none; }
+    .toc a:hover { color: var(--accent); }
+
+    section.block { margin-bottom: 56px; }
+    section.block h2 { font: 600 28px/1.15 var(--serif); letter-spacing: -0.02em; margin-bottom: 6px; }
+    section.block > p.section-lead, section.block > .feature-head + p.section-lead {
+      font-size: 14px; color: var(--muted); margin-bottom: 22px; max-width: 58ch;
+    }
+    section.block > .feature-head { padding-bottom: 0; }
+
+    .tier {
+      display: inline-flex; align-items: center; font: 700 10px var(--mono); letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 2px 8px; border-radius: 2px; border: 1px solid var(--line-hi); color: var(--muted); white-space: nowrap; flex-shrink: 0;
+    }
+    .tier-advanced { color: var(--accent); border-color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, transparent); }
+    .tier-beta { color: var(--muted); border-style: dashed; }
+    .tier-locked { color: var(--dim); border-color: var(--line); opacity: 0.85; }
+
+    .feature-list { display: flex; flex-direction: column; border-top: 2px solid var(--text); }
+    .feature-item { padding: 16px 0; border-bottom: 1px solid var(--line); }
+    .feature-item:first-child { border-top: 0; }
+    .feature-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 5px; }
+    .feature-head h4 { font: 600 17px/1.3 var(--serif); letter-spacing: -0.005em; }
+    .feature-item p { font-size: 13.5px; color: var(--muted); max-width: 60ch; }
+    .feature-item p strong { color: var(--text); }
+
+    .tag-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 4px; }
+    .tag-table th, .tag-table td { text-align: left; padding: 10px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    .tag-table th { font: 700 10px var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); background: var(--surface-2); }
+    .tag-table td.tag-name { font-family: var(--mono); color: var(--accent); white-space: nowrap; }
+    .tag-table td { color: var(--muted); }
+
+    .callout {
+      background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 2px;
+      padding: 14px 16px; font-size: 13px; color: var(--muted); margin-top: 16px;
+    }
+    .callout strong { color: var(--text); }
+    .callout a { color: var(--accent-2); }
+
+    /* ── legal pages ── */
+    .wrap { counter-reset: entry; }
+    section.entry { padding: 26px 0; border-bottom: 1px solid var(--line); counter-increment: entry; position: relative; }
+    section.entry:first-of-type { border-top: 2px solid var(--text); }
+    section.entry h2 { font: 600 22px/1.2 var(--serif); letter-spacing: -0.015em; margin-bottom: 10px; display: flex; align-items: baseline; gap: 12px; }
+    section.entry h2::before { content: counter(entry, decimal-leading-zero); font: 700 11px var(--mono); letter-spacing: 0.1em; color: var(--accent); }
+    section.entry p, section.entry li { font-size: 14px; color: var(--muted); }
+    section.entry p + p { margin-top: 10px; }
+    section.entry ul { margin: 10px 0 0 1.15em; display: flex; flex-direction: column; gap: 8px; }
+    section.entry li::marker { color: var(--accent); }
+    section.entry strong { color: var(--text); font-weight: 600; }
+
+    /* ── footer ── */
+    footer.site {
+      margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--line);
+      display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center;
+      font: 11.5px var(--mono); letter-spacing: 0.03em; color: var(--dim);
+    }
+    footer.site a { color: var(--muted); text-decoration: none; }
+    footer.site a:hover { color: var(--accent); }
+
+    @media (max-width: 560px) {
+      .wrap { padding: 24px 18px 48px; }
+      header.site { flex-direction: column; align-items: flex-start; gap: 14px; margin-bottom: 40px; }
+      .head-right { width: 100%; justify-content: space-between; }
+      .plugin-links { flex-direction: column; }
+      .step { grid-template-columns: 40px 1fr; }
+      .feature-head { flex-direction: column; align-items: flex-start; gap: 6px; }
+      .tag-table { font-size: 12px; }
+      .numbers-row { flex-wrap: wrap; }
+      .stat { flex: 1 1 45%; padding-left: 14px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn { transition: none; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="site">
+      <a class="brand" href="index.html">
+        <img class="brand-logo" src="assets/FireporterPluginImage_new.png" width="26" height="26" alt="Fireporter" />
+        Fireporter
+      </a>
+      <div class="head-right">
+      <nav class="site-nav" aria-label="Legal">
+        <a href="index.html">Home</a>
+        <a href="guide.html">Guide</a>
+        <a class="active" href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </nav>
+        <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch light or dark theme" title="Switch theme"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M7 1.5a5.5 5.5 0 0 1 0 11z" fill="currentColor"/></svg></button>
+      </div>
+    </header>
+
+    <div class="hero page">
+      <p class="meta">Privacy</p>
+      <h1>Privacy <em>Policy</em></h1>
+      <p class="updated">Last updated: November 16, 2026</p>
+      <p class="lead">
+        This policy explains what Fireporter does with data when you use the Figma plugin,
+        the Roblox Studio plugin, and optional online features such as image upload.
+      </p>
+    </div>
+
+    <nav class="toc" aria-label="On this page">
+      <div class="toc-title">On this page</div>
+      <ol>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#how-it-works">How Fireporter works</a></li>
+        <li><a href="#network">Network activity</a></li>
+        <li><a href="#storage">Data storage</a></li>
+        <li><a href="#accounts">Accounts &amp; tokens</a></li>
+        <li><a href="#images">Images &amp; moderation</a></li>
+        <li><a href="#support">Support tickets</a></li>
+        <li><a href="#third-party">Third-party services</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ol>
+    </nav>
+
+    <section class="entry" id="overview">
+      <h2>Overview</h2>
+      <p>
+        Fireporter is a tool for converting UI layouts from Figma into Roblox GUI instances.
+        We aim to collect only what is needed for the features you use, and to avoid selling
+        or monetizing your design data.
+      </p>
+      <p>
+        <strong>We do not sell personal data.</strong> We do not use advertising trackers
+        or analytics SDKs inside the plugins.
+      </p>
+    </section>
+
+    <section class="entry" id="how-it-works">
+      <h2>How Fireporter works</h2>
+      <p>Fireporter has two main components:</p>
+      <ul>
+        <li>
+          <strong>Figma plugin</strong> — reads the layer(s) you select in Figma
+          (position, size, fills, effects, text, and related properties) and builds an export
+          (JSON and, when needed, image assets).
+        </li>
+        <li>
+          <strong>Roblox Studio plugin</strong> — builds matching UI instances in your open place
+          from the JSON you paste into it. It does not contact Fireporter's backend.
+        </li>
+      </ul>
+    </section>
+
+    <section class="entry" id="network">
+      <h2>Network activity</h2>
+      <p>
+        <strong>Default / paste export</strong> can be used without signing in. In that flow,
+        processing stays on your machine until you copy JSON yourself.
+      </p>
+      <p>
+        <strong>Upload mode and Auto Mode</strong> (when you are signed in) communicate with
+        Fireporter's backend and with Roblox's APIs. Typical purposes include:
+      </p>
+      <ul>
+        <li>Roblox OAuth sign-in and token refresh</li>
+        <li>Sending the images from your selection to Fireporter's backend, which uploads them to Roblox on your behalf and returns the asset IDs</li>
+      </ul>
+      <p>
+        <strong>Preview Roblox UI</strong> runs entirely inside the Figma plugin on your machine. It
+        sends nothing to Fireporter's backend.
+      </p>
+      <p>
+        The Fireporter website shows the plugin's public Users, Likes, and Saves counts. To get them,
+        the website asks Fireporter's backend, which reads those public numbers from the plugin's
+        Figma Community page. That request contains no personal data, and visitors are not tracked.
+      </p>
+      <p>
+        Only those images and your connection code are sent. The rest of your design data
+        (layout, text, colors, and structure) stays in the plugin and is never sent to Fireporter's
+        backend. Images are used only to provide the upload and are not used for advertising.
+      </p>
+    </section>
+
+    <section class="entry" id="storage">
+      <h2>Data storage</h2>
+      <ul>
+        <li>
+          <strong>On your device</strong> — the Figma plugin stores small items in Figma
+          <em>clientStorage</em>: your Roblox connection code, your username, simple preferences,
+          and any optional "My Assets" images you upload for local reuse. That data stays in your
+          Figma client storage quota.
+        </li>
+        <li>
+          <strong>On our backend</strong> — Fireporter's backend has no database. It does not store
+          your designs, images, tokens, or account details. Requests are processed in memory and
+          discarded when they finish. Our hosting provider may keep standard operational logs, such
+          as request times and error messages, under its own policy.
+        </li>
+        <li>
+          <strong>Roblox</strong> — images uploaded through Upload or Auto Mode are subject to
+          Roblox's own storage, moderation, and policies.
+        </li>
+      </ul>
+    </section>
+
+    <section class="entry" id="accounts">
+      <h2>Accounts &amp; tokens</h2>
+      <p>
+        Optional Roblox login uses Roblox OAuth. Fireporter asks for permission to read your basic
+        profile, read and write your assets, and read your inventory items, so that it can upload
+        images to your account. After you approve, the backend bundles your Roblox access and refresh
+        tokens, user ID, and username into a connection code, encrypts it with a key that only the
+        backend holds, and shows it to you on the confirmation page. You paste it into the plugin,
+        which keeps it in Figma clientStorage on your device. The plugin sends it back with each
+        upload so the backend can act on your behalf. Fireporter keeps no copy.
+      </p>
+      <p>
+        Logging out removes the code from the plugin. Because Fireporter keeps no server-side
+        record, you can also revoke its access at any time from your Roblox account settings. Treat
+        the connection code like a password and do not share it.
+      </p>
+      <p>
+        Fireporter does not ask for your Figma password. It uses the normal Figma plugin APIs
+        available inside the editor.
+      </p>
+    </section>
+
+    <section class="entry" id="images">
+      <h2>Images &amp; moderation</h2>
+      <p>
+        When images are uploaded to Roblox, they are reviewed under Roblox's rules. If content is
+        rejected or an account is restricted for upload-related reasons, Fireporter shows an
+        error for the affected images, and the rest of your export still completes.
+      </p>
+      <p>
+        You are responsible for ensuring that designs and assets you export are appropriate and
+        that you have the rights to use them.
+      </p>
+    </section>
+
+    <section class="entry" id="support">
+      <h2>Support tickets</h2>
+      <p>
+        The <strong>Support</strong> tab lets you open a support ticket instead of messaging on
+        Discord. Submitting a ticket sends the following to the developer by email, for the sole
+        purpose of responding to your request:
+      </p>
+      <ul>
+        <li>The category and subject you selected</li>
+        <li>The message you wrote</li>
+        <li>The email address you provide, so we can reply</li>
+        <li>Any files you choose to attach (screenshots, video, or Figma/Roblox files) — attachments are optional and only sent if you add them</li>
+      </ul>
+      <p>
+        Ticket content is delivered directly by email through our email-delivery provider and is
+        not stored by Fireporter's backend. Attachment size and file type are limited on the
+        client before anything is sent.
+      </p>
+    </section>
+
+    <section class="entry" id="third-party">
+      <h2>Third-party services</h2>
+      <p>Depending on the features you use, Fireporter may rely on:</p>
+      <ul>
+        <li><strong>Figma</strong> — plugin host and client storage</li>
+        <li><strong>Roblox</strong> — OAuth, asset upload, and Studio</li>
+        <li><strong>Hosting providers</strong> — for the Fireporter backend (serverless deployment and standard operational logs)</li>
+        <li><strong>Email delivery provider</strong> — used only to send support tickets you submit to the developer's inbox</li>
+      </ul>
+      <p>
+        Those providers process data under their own terms and privacy policies when you use the
+        related platforms.
+      </p>
+    </section>
+
+    <section class="entry" id="contact">
+      <h2>Contact</h2>
+      <p>
+        Questions about this policy can be raised through the Fireporter Discord community or other
+        support channels listed in the plugin (Socials / Support tabs).
+      </p>
+      <p>
+        We may update this page when the product changes. The "Last updated" date at the top will
+        change when we do.
+      </p>
+    </section>
+
+    <footer class="site">
+      <span>© 2026 Fireporter</span>
+      <span><a href="terms.html">Terms of Service</a> · <a href="privacy.html">Privacy Policy</a></span>
+    </footer>
+  </div>
+  <script>
+    (function () {
+      var b = document.getElementById("themeBtn"); if (!b) return;
+      function cur() {
+        var t = document.documentElement.getAttribute("data-theme");
+        if (t) return t;
+        return window.matchMedia && matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+      }
+      b.addEventListener("click", function () {
+        var n = cur() === "light" ? "dark" : "light";
+        document.documentElement.setAttribute("data-theme", n);
+        try { localStorage.setItem("fp-theme", n); } catch (e) {}
+      });
+    })();
+  </script>
+</body>
+</html>

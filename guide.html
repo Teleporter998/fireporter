@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="How to use Fireporter — step-by-step guide to every feature, from the basics to advanced and beta tools." />
+  <title>Guide · Fireporter</title>
+  <link rel="icon" href="assets/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/favicon.png" />
+  <script>try{var t=localStorage.getItem("fp-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+  <style>
+    /* Fireporter — workbench skin (shared look with the founder console) */
+    :root {
+      color-scheme: dark;
+      --bg: #14120f; --bg2: #191611; --surface: #1d1a15; --surface-2: #262219;
+      --line: #3a3328; --line-hi: #5a4f3e;
+      --text: #f0e9da; --muted: #aca291; --dim: #7d7464;
+      --accent: #ff7a2f; --accent-2: #ffa266; --ink: #14120f;
+      --grid: rgba(240, 233, 218, 0.035); --hard: #000;
+      --sans: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+      --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+      --mono: ui-monospace, "Cascadia Code", "SF Mono", "JetBrains Mono", Consolas, "Liberation Mono", monospace;
+    }
+    :root[data-theme="light"] {
+      color-scheme: light;
+      --bg: #f1ece0; --bg2: #ebe5d6; --surface: #faf7ef; --surface-2: #f2ede0;
+      --line: #d6ccb7; --line-hi: #b3a68b;
+      --text: #201b13; --muted: #6a604f; --dim: #8d8370;
+      --accent: #d9530f; --accent-2: #b9440a; --ink: #fff7ea;
+      --grid: rgba(32, 27, 19, 0.05); --hard: #201b13;
+    }
+    @media (prefers-color-scheme: light) {
+      :root:not([data-theme="dark"]) {
+        color-scheme: light;
+        --bg: #f1ece0; --bg2: #ebe5d6; --surface: #faf7ef; --surface-2: #f2ede0;
+        --line: #d6ccb7; --line-hi: #b3a68b;
+        --text: #201b13; --muted: #6a604f; --dim: #8d8370;
+        --accent: #d9530f; --accent-2: #b9440a; --ink: #fff7ea;
+        --grid: rgba(32, 27, 19, 0.05); --hard: #201b13;
+      }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background-color: var(--bg);
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 36px 36px;
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    ::selection { background: var(--accent); color: var(--ink); }
+    a { color: var(--accent-2); text-underline-offset: 3px; }
+    a:hover { color: var(--accent); }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    code { font-family: var(--mono); font-size: 0.9em; color: var(--accent-2); }
+
+    .wrap { max-width: 760px; margin: 0 auto; padding: 32px 24px 64px; }
+    .wrap.wide { max-width: 860px; }
+
+    /* ── header ── */
+    header.site {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding-bottom: 16px; margin-bottom: 56px;
+      border-bottom: 1px solid var(--line);
+    }
+    .brand {
+      display: flex; align-items: center; gap: 11px; text-decoration: none; color: var(--text);
+      font: 700 20px/1 var(--serif); letter-spacing: -0.01em;
+    }
+    .brand:hover { color: var(--text); }
+    .brand-logo {
+      width: 30px; height: 30px; border-radius: 3px; object-fit: cover; background: var(--surface);
+      box-shadow: 2px 2px 0 var(--hard); border: 1px solid var(--line-hi);
+    }
+    .head-right { display: flex; align-items: center; gap: 18px; }
+    nav.site-nav { display: flex; gap: 20px; flex-wrap: wrap; }
+    nav.site-nav a {
+      font: 600 11.5px var(--mono); letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none; padding: 3px 0; border-bottom: 2px solid transparent;
+    }
+    nav.site-nav a:hover { color: var(--text); border-color: var(--line-hi); }
+    nav.site-nav a.active { color: var(--accent); border-color: var(--accent); }
+    .theme-btn {
+      width: 30px; height: 30px; border: 1px solid var(--line-hi); background: transparent; color: var(--muted);
+      border-radius: 3px; cursor: pointer; display: grid; place-items: center; font: 14px/1 var(--mono);
+    }
+    .theme-btn:hover { color: var(--text); border-color: var(--text); box-shadow: 2px 2px 0 var(--hard); }
+
+    /* ── headings / hero ── */
+    .meta {
+      font: 11.5px var(--mono); letter-spacing: 0.06em; color: var(--dim); margin-bottom: 14px;
+      display: flex; align-items: center; gap: 10px; text-transform: uppercase;
+    }
+    .meta::before { content: ""; width: 22px; height: 2px; background: var(--accent); }
+    .hero { margin-bottom: 48px; }
+    h1 {
+      font: 600 clamp(36px, 7vw, 64px)/1 var(--serif); letter-spacing: -0.035em; margin-bottom: 18px;
+    }
+    h1 em { font-style: italic; color: var(--accent); }
+    .hero.page h1 { font-size: clamp(32px, 5.5vw, 48px); }
+    .lead { font-size: 16px; color: var(--muted); max-width: 54ch; }
+    .lead strong { color: var(--text); font-weight: 600; }
+    .updated { font: 12px var(--mono); color: var(--dim); letter-spacing: 0.04em; margin-bottom: 4px; }
+    .hero-logo { display: none; }
+
+    /* ── buttons ── */
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 28px 0 14px; }
+    .plugin-links { display: flex; gap: 12px; margin-bottom: 14px; }
+    .plugin-links .btn { flex: 1 1 0; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      font: 700 12px var(--mono); letter-spacing: 0.03em; text-decoration: none;
+      padding: 11px 18px; border-radius: 3px; border: 1px solid var(--line-hi); cursor: pointer;
+      transition: transform 0.1s, box-shadow 0.1s, border-color 0.12s, background 0.12s;
+    }
+    .btn-primary { background: var(--accent); color: var(--ink); border-color: var(--accent); box-shadow: 3px 3px 0 var(--hard); }
+    .btn-primary:hover { background: var(--accent-2); border-color: var(--accent-2); color: var(--ink); transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--hard); }
+    .btn-primary:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--hard); }
+    .btn-secondary { background: transparent; color: var(--text); }
+    .btn-secondary:hover { border-color: var(--text); color: var(--text); transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--hard); }
+    .btn-secondary:active { transform: translate(1px, 1px); box-shadow: none; }
+    .hint { font: 11.5px/1.6 var(--mono); color: var(--dim); max-width: 62ch; }
+
+    /* ── numbers ledger ── */
+    .numbers { margin: 0 0 56px; }
+    .numbers[hidden] { display: none; }
+    .numbers h2 { font: 600 clamp(24px, 4vw, 30px)/1.1 var(--serif); letter-spacing: -0.02em; margin-bottom: 6px; }
+    .numbers h2 span { font-style: italic; color: var(--accent); }
+    .numbers .sub { font: 11.5px var(--mono); color: var(--dim); letter-spacing: 0.03em; margin-bottom: 22px; }
+    .numbers-row { display: flex; border-top: 2px solid var(--text); border-bottom: 1px solid var(--line); }
+    .stat { flex: 1 1 0; padding: 18px 0 18px 20px; min-width: 0; }
+    .stat[hidden] { display: none; }
+    .stat:not([hidden]) ~ .stat:not([hidden]) { border-left: 1px solid var(--line); }
+    .stat:not([hidden]):first-child { padding-left: 0; }
+    .stat-label { font: 700 10px var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+    .stat-num {
+      font: 600 clamp(40px, 9vw, 72px)/1 var(--serif); letter-spacing: -0.04em;
+      font-variant-numeric: tabular-nums; margin-top: 8px;
+    }
+
+    /* ── steps (home + guide) ── */
+    .steps { border-top: 2px solid var(--text); margin-top: 8px; }
+    .step {
+      display: grid; grid-template-columns: 52px 1fr; gap: 14px; padding: 22px 0; border-bottom: 1px solid var(--line);
+    }
+    .step-num { font: 600 30px/1 var(--serif); color: var(--accent); letter-spacing: -0.03em; }
+    .step h3 { font: 600 19px/1.25 var(--serif); margin-bottom: 5px; letter-spacing: -0.01em; }
+    .step p { font-size: 14px; color: var(--muted); max-width: 52ch; }
+    .step p strong { color: var(--text); }
+    .step code { background: var(--surface); border: 1px solid var(--line); padding: 1px 6px; border-radius: 2px; }
+
+    /* ── guide ── */
+    .toc {
+      background: var(--surface); border: 1px solid var(--line); border-radius: 3px;
+      padding: 18px 20px; margin-bottom: 44px; box-shadow: 4px 4px 0 var(--hard);
+    }
+    .toc-title { font: 700 10px var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    .toc ol { margin: 0; padding: 0; list-style: none; counter-reset: toc; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 6px 24px; }
+    .toc li { counter-increment: toc; display: flex; gap: 10px; align-items: baseline; }
+    .toc li::before { content: counter(toc, decimal-leading-zero); font: 10.5px var(--mono); color: var(--dim); }
+    .toc a { font-size: 13.5px; color: var(--muted); text-decoration: none; }
+    .toc a:hover { color: var(--accent); }
+
+    section.block { margin-bottom: 56px; }
+    section.block h2 { font: 600 28px/1.15 var(--serif); letter-spacing: -0.02em; margin-bottom: 6px; }
+    section.block > p.section-lead, section.block > .feature-head + p.section-lead {
+      font-size: 14px; color: var(--muted); margin-bottom: 22px; max-width: 58ch;
+    }
+    section.block > .feature-head { padding-bottom: 0; }
+
+    .tier {
+      display: inline-flex; align-items: center; font: 700 10px var(--mono); letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 2px 8px; border-radius: 2px; border: 1px solid var(--line-hi); color: var(--muted); white-space: nowrap; flex-shrink: 0;
+    }
+    .tier-advanced { color: var(--accent); border-color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, transparent); }
+    .tier-beta { color: var(--muted); border-style: dashed; }
+    .tier-locked { color: var(--dim); border-color: var(--line); opacity: 0.85; }
+
+    .feature-list { display: flex; flex-direction: column; border-top: 2px solid var(--text); }
+    .feature-item { padding: 16px 0; border-bottom: 1px solid var(--line); }
+    .feature-item:first-child { border-top: 0; }
+    .feature-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 5px; }
+    .feature-head h4 { font: 600 17px/1.3 var(--serif); letter-spacing: -0.005em; }
+    .feature-item p { font-size: 13.5px; color: var(--muted); max-width: 60ch; }
+    .feature-item p strong { color: var(--text); }
+
+    .tag-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 4px; }
+    .tag-table th, .tag-table td { text-align: left; padding: 10px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    .tag-table th { font: 700 10px var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); background: var(--surface-2); }
+    .tag-table td.tag-name { font-family: var(--mono); color: var(--accent); white-space: nowrap; }
+    .tag-table td { color: var(--muted); }
+
+    .callout {
+      background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 2px;
+      padding: 14px 16px; font-size: 13px; color: var(--muted); margin-top: 16px;
+    }
+    .callout strong { color: var(--text); }
+    .callout a { color: var(--accent-2); }
+
+    /* ── legal pages ── */
+    .wrap { counter-reset: entry; }
+    section.entry { padding: 26px 0; border-bottom: 1px solid var(--line); counter-increment: entry; position: relative; }
+    section.entry:first-of-type { border-top: 2px solid var(--text); }
+    section.entry h2 { font: 600 22px/1.2 var(--serif); letter-spacing: -0.015em; margin-bottom: 10px; display: flex; align-items: baseline; gap: 12px; }
+    section.entry h2::before { content: counter(entry, decimal-leading-zero); font: 700 11px var(--mono); letter-spacing: 0.1em; color: var(--accent); }
+    section.entry p, section.entry li { font-size: 14px; color: var(--muted); }
+    section.entry p + p { margin-top: 10px; }
+    section.entry ul { margin: 10px 0 0 1.15em; display: flex; flex-direction: column; gap: 8px; }
+    section.entry li::marker { color: var(--accent); }
+    section.entry strong { color: var(--text); font-weight: 600; }
+
+    /* ── footer ── */
+    footer.site {
+      margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--line);
+      display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center;
+      font: 11.5px var(--mono); letter-spacing: 0.03em; color: var(--dim);
+    }
+    footer.site a { color: var(--muted); text-decoration: none; }
+    footer.site a:hover { color: var(--accent); }
+
+    @media (max-width: 560px) {
+      .wrap { padding: 24px 18px 48px; }
+      header.site { flex-direction: column; align-items: flex-start; gap: 14px; margin-bottom: 40px; }
+      .head-right { width: 100%; justify-content: space-between; }
+      .plugin-links { flex-direction: column; }
+      .step { grid-template-columns: 40px 1fr; }
+      .feature-head { flex-direction: column; align-items: flex-start; gap: 6px; }
+      .tag-table { font-size: 12px; }
+      .numbers-row { flex-wrap: wrap; }
+      .stat { flex: 1 1 45%; padding-left: 14px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn { transition: none; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="site">
+      <a class="brand" href="index.html">
+        <img class="brand-logo" src="assets/FireporterPluginImage_new.png" width="26" height="26" alt="Fireporter" />
+        Fireporter
+      </a>
+      <div class="head-right">
+      <nav class="site-nav" aria-label="Site">
+        <a href="index.html">Home</a>
+        <a class="active" href="guide.html">Guide</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </nav>
+        <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch light or dark theme" title="Switch theme"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M7 1.5a5.5 5.5 0 0 1 0 11z" fill="currentColor"/></svg></button>
+      </div>
+    </header>
+
+    <div class="hero page">
+      <p class="meta">The guide</p>
+      <h1>How to use <em>Fireporter</em></h1>
+      <p class="lead">
+        A step-by-step walkthrough of every feature in the Figma plugin and the Roblox Studio
+        plugin, organized from the basics to advanced and beta tools.
+      </p>
+    </div>
+
+    <nav class="toc" aria-label="On this page">
+      <div class="toc-title">On this page</div>
+      <ol>
+        <li><a href="#getting-started">Getting started</a></li>
+        <li><a href="#basics">Basics</a></li>
+        <li><a href="#advanced">Advanced</a></li>
+        <li><a href="#beta">Beta features</a></li>
+        <li><a href="#preview">Preview Roblox UI</a></li>
+        <li><a href="#studio">Roblox Studio plugin</a></li>
+      </ol>
+    </nav>
+
+    <section class="block" id="getting-started">
+      <h2>Getting started</h2>
+      <p class="section-lead">The core workflow, without any extra toggles.</p>
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">01</span>
+          <div>
+            <h3>Install both plugins</h3>
+            <p>Add the Figma plugin from the Figma Community and the companion plugin to Roblox Studio from the Creator Store.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">02</span>
+          <div>
+            <h3>Select something in Figma</h3>
+            <p>Select one frame, group, or layer (or several at once) — whatever you want to bring into Roblox.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">03</span>
+          <div>
+            <h3>Open Fireporter and click Export</h3>
+            <p>The Export tab turns your selection into Roblox-ready data and shows it in the code box. In Normal mode images are not uploaded; to have them uploaded for you, use Upload mode (see Beta features).</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">04</span>
+          <div>
+            <h3>Copy the code</h3>
+            <p>Click <code>Copy</code> to put the exported data on your clipboard.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">05</span>
+          <div>
+            <h3>Import it in Studio</h3>
+            <p>In Roblox Studio, select a <code>ScreenGui</code> in the Explorer, open the Fireporter widget, paste the code into the text box, and click <code>Import</code>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="basics">
+      <div class="feature-head" style="margin-bottom:6px;">
+        <h2 style="margin-bottom:0;">Basics</h2>
+        <span class="tier">On by default</span>
+      </div>
+      <p class="section-lead">
+        These live in the top row of the Export tab. They're switched on by default and cover
+        what most exports need.
+      </p>
+      <div class="feature-list">
+        <div class="feature-item">
+          <div class="feature-head"><h4>Include Strokes</h4><span class="tier">Basics</span></div>
+          <p>Carries Figma borders/outlines over as a Roblox <code>UIStroke</code>, matching color, thickness, and inside/center/outside alignment.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-head"><h4>Include Effects</h4><span class="tier">Basics</span></div>
+          <p>Accounts for shadows and blurs when measuring a layer, so exported sizes and positions match what you see in Figma instead of just the raw layout box.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-head"><h4>Auto Scale</h4><span class="tier">Basics</span></div>
+          <p>Converts pixel sizes and positions into scale values, so your UI adapts across different screen resolutions in Roblox instead of staying a fixed pixel size.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-head"><h4>Include Gradients</h4><span class="tier">Basics</span></div>
+          <p>Exports linear gradient fills as a Roblox <code>UIGradient</code>, keeping stop colors, positions, and rotation.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-head"><h4>Include Text</h4><span class="tier">Basics</span></div>
+          <p>Keeps text layers as real, editable <code>TextLabel</code> instances instead of flattening them into images. A word that Figma wraps over several lines without spaces turns on <code>RichText</code> automatically so it looks the same in Roblox.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-head"><h4>Text Auto Scale</h4><span class="tier">Basics</span></div>
+          <p>Turns on Roblox's <code>TextScaled</code>, so text resizes to fit its container across screen sizes.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-head"><h4>Include Text Strokes</h4><span class="tier">Basics</span></div>
+          <p>Keeps outlined/stroked text styling from Figma on the exported <code>TextLabel</code>.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-head"><h4>Auto Text Converter</h4><span class="tier">Basics</span></div>
+          <p>If a text layer uses a font Roblox doesn't support, this automatically rasterizes just that layer into an image instead of breaking the export.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="advanced">
+      <div class="feature-head" style="margin-bottom:6px;">
+        <h2 style="margin-bottom:0;">Advanced</h2>
+        <span class="tier tier-advanced">Advanced</span>
+      </div>
+      <p class="section-lead">
+        Tools that take a bit more setup — naming conventions and account connection — but give
+        you more control over the result.
+      </p>
+
+      <div class="feature-list">
+        <div class="feature-item">
+          <div class="feature-head"><h4>Tags system</h4><span class="tier tier-advanced">Advanced</span></div>
+          <p>
+            Open the <strong>Tags</strong> tab, select a layer in Figma, and click a tag to add it
+            to the layer's name (click again to remove). Tags tell Fireporter exactly which Roblox
+            instance type to build, overriding the automatic guess.
+          </p>
+          <table class="tag-table">
+            <thead>
+              <tr><th>Tag</th><th>Result in Roblox</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="tag-name">_frame</td><td>Frame</td></tr>
+              <tr><td class="tag-name">_text</td><td>TextLabel</td></tr>
+              <tr><td class="tag-name">_button</td><td>TextButton / ImageButton</td></tr>
+              <tr><td class="tag-name">_box</td><td>TextBox</td></tr>
+              <tr><td class="tag-name">_scroll</td><td>ScrollingFrame</td></tr>
+              <tr><td class="tag-name">_canvas</td><td>CanvasGroup</td></tr>
+              <tr><td class="tag-name">_gradient</td><td>Forces a UIGradient even outside frames</td></tr>
+              <tr><td class="tag-name">_lock</td><td>Adds a UIAspectRatioConstraint</td></tr>
+              <tr><td class="tag-name">_grayscale</td><td>Recolors that layer to grayscale on export</td></tr>
+              <tr><td class="tag-name">_ignore</td><td>Skips the layer entirely</td></tr>
+              <tr><td class="tag-name">_image</td><td>ImageLabel</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-head"><h4>My Assets</h4><span class="tier tier-advanced">Advanced</span></div>
+          <p>
+            The <strong>Assets</strong> tab lets you upload your own images or whole folders,
+            organize them, and apply one directly onto a selected Frame or Rectangle in Figma
+            without leaving the plugin. Assets are stored only on your device.
+          </p>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-head"><h4>Connect your Roblox account</h4><span class="tier tier-advanced">Advanced</span></div>
+          <p>
+            Required for Upload mode and for image uploads in Auto Mode. Open the <strong>Account</strong>
+            tab and log in with Roblox. After you approve access in your browser, the page shows a
+            connection code. Copy it, switch back to Figma, paste it into the Connect Roblox prompt
+            and confirm. The code is stored only on your device, and the access it grants is limited
+            to uploading images, as described in the <a href="privacy.html" style="color:var(--accent);">privacy policy</a>.
+          </p>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-head"><h4>Support tickets</h4><span class="tier tier-advanced">Advanced</span></div>
+          <p>
+            Found a bug or need help? Open the <strong>Support</strong> tab and click
+            <strong>Create a Support Ticket</strong>. Pick a category, describe the issue, attach
+            a screenshot, video, or Figma/Roblox file if it helps, and leave your email so the
+            developer can reply directly.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="beta">
+      <div class="feature-head" style="margin-bottom:6px;">
+        <h2 style="margin-bottom:0;">Beta features</h2>
+        <span class="tier tier-beta">Beta</span>
+      </div>
+      <p class="section-lead">
+        The second row of toggles in the Export tab. These work, but are newer and may change —
+        expect occasional rough edges.
+      </p>
+      <div class="feature-list">
+        <div class="feature-item">
+          <div class="feature-head"><h4>Naming Intelligence</h4><span class="tier tier-beta">Beta</span></div>
+          <p>Generates cleaner instance names from tags or text content instead of raw Figma layer names, and automatically de-duplicates identical sibling names.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-head"><h4>Respect Shadows</h4><span class="tier tier-beta">Beta</span></div>
+          <p>Exports Figma drop shadows as a Roblox <code>UIShadow</code>, carrying over blur radius, offset, spread, color, and transparency. Shadows on real text use the UIShadow <code>Text</code> mode; everything else uses <code>Shape</code>.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-head"><h4>Respect Corners</h4><span class="tier tier-beta">Beta</span></div>
+          <p>Exports individually rounded corners as a Roblox <code>UICorner</code>, instead of forcing one uniform radius on all four corners.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-head"><h4>Design Polish Enhancer</h4><span class="tier tier-beta">Beta</span></div>
+          <p>A cleanup pass before export: rounds positions/sizes to whole pixels, snaps spacing to an 8px grid, rounds corner radii to common steps, and aligns sibling edges and text baselines.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-head"><h4>Auto Mode</h4><span class="tier tier-beta">Beta</span></div>
+          <p>A more hands-off export: structural layers default to Frame and text defaults to TextLabel without tagging. Figma <strong>vector path</strong> layers are exported as images (ImageLabel, or ImageButton when tagged <code>_button</code>), and identical images are merged so each one is uploaded only once. Text with an unsupported font is turned into an image with its shadow baked in, so it never gets a second UIShadow. If you're logged in, images are uploaded to Roblox with their asset IDs filled into the export. Without a login you still get the JSON, but images are not uploaded.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-head"><h4>Filter (Upload mode only)</h4><span class="tier tier-beta">Beta</span></div>
+          <p>Right-click the Filter toggle to choose grayscale or a custom tint color, and which element types it applies to (text, frames, image labels, image buttons). Only affects Upload mode exports.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-head"><h4>Preview Roblox UI</h4><span class="tier tier-beta">Beta</span></div>
+          <p>Opens a window that shows how your selection will look in Roblox Studio. See the <a href="#preview" style="color:var(--accent);">section below</a> for details.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-head"><h4>Upload mode</h4><span class="tier tier-beta">Beta</span></div>
+          <p>Requires a connected Roblox account. Uploads the images in your selection to your Roblox account and writes their asset IDs into the exported JSON, so images appear as soon as you paste it into Studio. Only the images are sent for upload. The rest of your design data stays in the plugin, and you still copy the JSON and paste it into Studio yourself.</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>Looking for Live Mode?</strong> It has been replaced by Upload mode. Exports are
+        no longer sent to Studio automatically. You copy the JSON and paste it, and your images
+        are still uploaded for you.
+      </div>
+
+      <div class="callout">
+        You may also notice a locked, disabled button in the toolbar —
+        <span class="tier tier-locked">Coming soon</span> — that's a feature slot that isn't
+        available yet.
+      </div>
+    </section>
+
+    <section class="block" id="preview">
+      <div class="feature-head" style="margin-bottom:6px;">
+        <h2 style="margin-bottom:0;">Preview Roblox UI</h2>
+        <span class="tier tier-beta">Beta</span>
+      </div>
+      <p class="section-lead">
+        Check your design before it ever reaches Studio. The preview is built from the same data
+        the export produces, so strokes, corners, gradients, shadows, and text appear the way
+        they will in Roblox.
+      </p>
+      <div class="feature-list">
+        <div class="feature-item">
+          <div class="feature-head"><h4>Turn it on</h4><span class="tier">Basics</span></div>
+          <p>Select a layer, switch on <strong>Preview Roblox UI</strong>, and the preview window opens. Use <strong>Refresh</strong> after you change something in Figma.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-head"><h4>Matches your export mode</h4><span class="tier">Basics</span></div>
+          <p>The preview follows Normal, Upload, ZIP, and Auto mode, so shapes that become images in Upload or Auto mode are shown as images too.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-head"><h4>Screen size and background</h4><span class="tier">Basics</span></div>
+          <p>Pick a screen size and a background: Dark, Light, Baseplate, or Checker. A blur slider softens the background, and you drag it with the mouse held down.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-head"><h4>Zoom and pan</h4><span class="tier">Basics</span></div>
+          <p>Scroll or use the zoom controls to zoom smoothly, and drag the preview to move around.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="studio">
+      <h2>Roblox Studio plugin</h2>
+      <p class="section-lead">Once your UI is imported, the Studio-side widget also has some controls of its own.</p>
+      <div class="feature-list">
+        <div class="feature-item">
+          <div class="feature-head"><h4>Position pad</h4><span class="tier">Basics</span></div>
+          <p>
+            Select any GuiObject in the Explorer (or use the instance you just imported) and click
+            one of the 9 grid cells to instantly snap it to that screen anchor — top-left, center,
+            bottom-right, and so on — using AnchorPoint and scale Position.
+          </p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-head"><h4>Target tracking</h4><span class="tier">Basics</span></div>
+          <p>The widget shows which instance the position controls currently target, updating automatically as your Explorer selection changes or right after an import.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site">
+      <span>© 2026 Fireporter</span>
+      <span><a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms of Service</a></span>
+    </footer>
+  </div>
+  <script>
+    (function () {
+      var b = document.getElementById("themeBtn"); if (!b) return;
+      function cur() {
+        var t = document.documentElement.getAttribute("data-theme");
+        if (t) return t;
+        return window.matchMedia && matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+      }
+      b.addEventListener("click", function () {
+        var n = cur() === "light" ? "dark" : "light";
+        document.documentElement.setAttribute("data-theme", n);
+        try { localStorage.setItem("fp-theme", n); } catch (e) {}
+      });
+    })();
+  </script>
+</body>
+</html>
